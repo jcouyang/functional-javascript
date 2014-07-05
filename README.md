@@ -7,8 +7,9 @@
 
 可能本书并不适合你, 但如果函数式对你来说:
 ![](http://m.memegen.com/5g7sza.jpg)
+![Imgur](http://i.imgur.com/iu3A9nR.png)
 
-那么这本书对后者会有所帮助.
+那么这本书对你会有所帮助.
 
 这里使用的 JavaScript 函数式库是 [Rambda](https://rawgit.com/CrossEye/ramda/master/docs/ramda.html), [为什么不用 Underscore](http://fr.umio.us/why-ramda/)这个话题还可以讲一章,我就放到附录吧,因为我不想在开始的时候讲,估计也不好体会.
 

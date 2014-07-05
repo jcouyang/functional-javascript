@@ -1,25 +1,18 @@
 {
-		"plugins": ["autocover", "richquotes"],
-		"pluginsConfig":{
-				"richquotes" :
-        {
-            "todos" : true
+    "plugins": [
+        "autocover",
+        "richquotes"
+    ],
+    "pluginsConfig": {
+        "richquotes": {
+            "todos": true
         },
-				"autocover": {
-						"title": "My Book",
-						"author": "Author",
-						"font": {
-								"size": null,
-								"family": "Impact",
-								"color": '#FFF'
-						},
-						"size": {
-								"w": 1800,
-								"h": 2360
-						},
-						"background": {
-								"color": '#09F'
-						}
-				}
-		}
+        "autocover": {
+            "title": "Functional JavaScript",
+            "author": "Jichao Ouyang",
+            "background": {
+                "color": "#09F"
+            }
+        }
+    }
 }

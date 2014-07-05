@@ -112,8 +112,16 @@ var plus = ramda.curry(function(a, b){
 max 3 4
 ```
 其实就是
-```haskell
-(max 3) 4
 ```
+ (max 3) 4
+```
+可以看看` max`与` max 3`函数的 类型
+```haskell
+ghci> :t max
+max :: Ord a => a -> a -> a
+ghci> :t max 3
+(Num a, Ord a) => a -> a
+```
+看明白了么
 
 <a class="jsbin-embed" href="http://jsbin.com/hamoq/3/embed?js,console">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
