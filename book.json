@@ -1,6 +1,10 @@
 {
-		"plugins": ["autocover"]
+		"plugins": ["autocover", "richquotes"],
 		"pluginsConfig":{
+				"richquotes" :
+        {
+            "todos" : true
+        },
 				"autocover": {
 						"title": "My Book",
 						"author": "Author",
