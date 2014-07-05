@@ -106,4 +106,14 @@ var plus = ramda.curry(function(a, b){
 })
 ```
 
+### 自动柯里化
+在 Haskell 语言中, 函数是会自动柯里化的:
+```haskell
+max 3 4
+```
+其实就是
+```haskell
+(max 3) 4
+```
+
 <a class="jsbin-embed" href="http://jsbin.com/hamoq/3/embed?js,console">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
