@@ -2,9 +2,14 @@
 
 为什么一上来就讲 lambda aka λ算子
 
+![](http://images.wikia.com/half-life/en/images/archive/3/3a/20120621181904!Lambda_reactor_complex_logo.png)
+
 先来看下[定义](): lambda包括一条变换规则（变量替换）和一条函数定义方式，Lambda演算之通用在于，任何一个可计算函数都能用这种形式来表达和求值。因而，它是等价于图灵机的.
 
 lambda其实就是`x`到`y`的映射关系, 但在大部分支持函数式的编程语言中, 它等价于匿名函数. 被称为 lambda 表达式. 因为这些函数只需要用一次或者几次, 不需要命名.
+
+![](http://m.memegen.com/eo6ojw.jpg)
+![](http://m.memegen.com/1qleyk.jpg)
 
 匿名函数在程序中的作用是可以作为参数传给高阶函数, 或者作为闭包被返回.
 

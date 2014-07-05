@@ -7,7 +7,7 @@
    * [high-order function](hight_order_function/high-order_function.md)
    * [map reduce filter](hight_order_function/map_reduce.md)
    * [柯里化 currying](hight_order_function/currying.md)
-   * [部分应用函数 partial application](hight_order_function/partial_application.md)
+   * [函数组合 compose function](hight_order_function/compose_function.md)
 * [模式匹配(Pattern Matching)](pattern_matching/README.md)
 * [Functor & Monad](functor_&_monad/README.md)
 

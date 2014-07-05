@@ -35,7 +35,7 @@ var aliasFor = oldName => {
 这里有两个 `return`, 一个是 `fn` 返回自己, 另一个是 `aliasFor` 也返回 `fn`, 并且给 `fn` 了几个别名 `fn.is` `fn.are`...
 
 什么意思呢? `fn` 返回 `fn`. 很简单就是 `fn() => fn`, 那么`fn()() => fn() => fn`...以此类推, 无论调用 fn 多少次,都最终返回 fn.
-
+![Imgur](http://i.imgur.com/1qUCC8s.png)
 有什么用呢,  由于这里使用了 `fn` 的副作用(side affect) 来干了一些事情`E[newName] = E[oldName]`, 也就是给 E 的方法起一个别名, 因此每次调用 fn 都会给`E` 起一个别名. `aliasFor`最后返回的是 `fn` 自己的一些别名,使得可以 chain 起来更可读一些:
 ```js
 aliasFor('reduce').is('reduceLeft).is(foldl)
