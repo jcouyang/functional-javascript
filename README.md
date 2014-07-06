@@ -8,7 +8,6 @@
 
 可能本书并不适合你, 但如果函数式对你来说:
 ![](http://m.memegen.com/5g7sza.jpg)
-![Imgur](http://i.imgur.com/iu3A9nR.png)
 
 那么这本书对你会有所帮助.
 
