@@ -1,0 +1,13 @@
+{
+    "name": "functional-javascript",
+    "version": "0.0.1",
+    "description": "",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jcouyang/functional-javascript.git"
+    },
+    "author": "Jichao Ouyang <oyanglulu@gmail.com>",
+    "dependencies": {
+        "gitbook-plugin-richquotes": "0.0.3"
+    }
+}
