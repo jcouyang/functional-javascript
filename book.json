@@ -1,18 +1,10 @@
 {
     "plugins": [
-        "autocover",
         "richquotes"
     ],
     "pluginsConfig": {
         "richquotes": {
             "todos": true
-        },
-        "autocover": {
-            "title": "Functional JavaScript",
-            "author": "Jichao Ouyang",
-            "background": {
-                "color": "#09F"
-            }
         }
     }
 }

@@ -96,16 +96,6 @@ chars.map(stylishChar)
 
 这就是函数式的思想, 用已有的函数组合出新的函数, 而柯里化每消费一个参数, 都会返回一个新的部分配置的函数, 这为函数组合提供了更灵活的手段, 并且使得接口更为流畅.
 
-再加上自动柯里化的库 [ramda](https://github.com/CrossEye/ramda), 简直就完美了
-```
-var multiple = ramda.curry(function(a, b){
-  return +b*a + ''
-})
-var plus = ramda.curry(function(a, b){
-  return (+b)+a + ''
-})
-```
-
 ### 自动柯里化
 在 Haskell 语言中, 函数是会自动柯里化的:
 ```haskell
@@ -119,9 +109,35 @@ max 3 4
 ```haskell
 ghci> :t max
 max :: Ord a => a -> a -> a
+```
+看明白了么, `Ord a =>` 表示类型约束为可以比较大小的类型, 因此`max` 的类型可以翻译成: 当给定一个`a`, 会得到`a -> a`, 再看看` max 3`的类型就好理解了
+```
 ghci> :t max 3
 (Num a, Ord a) => a -> a
 ```
-看明白了么
+左侧表示类型约束 `a`可以是` Ord` 或者` Num`, 意思是` max 3`还是一个函数,如果给定一个` Ord`或者` Num` 类型的参数 则返回一个` Ord`或者` Num`.
+
+现在是不是清晰了, 在 Haskell 中每给定一个参数, 函数如果是多参数的, 该函数还会返回一个处理余下参数的函数. 这就是自动柯里化.
+
+而在 Javascript(以及大多数语言) 中不是的, 如果给定多参函数的部分参数, 函数会默认其他参数是` undefined`, 而不会返回处理剩余参数的函数.
+```js
+function willNotCurry(a, b, c) {
+    console.log(a, b, c)
+    return a*b-c;
+}
+willNotCurry(1)
+// => NaN
+// => 1 undefined undefined
+```
+
+如果使用自动柯里化的库 [ramda](https://github.com/CrossEye/ramda), 前面的例子简直就完美了
+```
+var multiple = ramda.curry(function(a, b){
+  return +b*a + ''
+})
+var plus = ramda.curry(function(a, b){
+  return (+b)+a + ''
+})
+```
 
 <a class="jsbin-embed" href="http://jsbin.com/hamoq/3/embed?js,console">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
