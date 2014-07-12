@@ -1,10 +1,15 @@
 {
     "plugins": [
-        "richquotes"
+        "richquotes",
+				"jsbin",
+				"mixpanel"
     ],
     "pluginsConfig": {
         "richquotes": {
             "todos": true
-        }
+        },
+				"mixpanel": {
+						"token": "772614c606b57899f3c2d4daf0f02355"
+				}
     }
 }
