@@ -1,8 +1,8 @@
 {
     "plugins": [
+				"mixpanel",
         "richquotes",
-				"jsbin",
-				"mixpanel"
+				"jsbin"
     ],
     "pluginsConfig": {
         "richquotes": {
