@@ -2,7 +2,8 @@
     "plugins": [
 				"mixpanel",
         "richquotes",
-				"jsbin"
+				"jsbin",
+				"ga"
     ],
     "pluginsConfig": {
         "richquotes": {
@@ -10,6 +11,9 @@
         },
 				"mixpanel": {
 						"token": "04b882f603277dd5498776d62145ad92"
+				},
+				"ga": {
+						"token": "UA-32314154-1"
 				}
     }
 }
