@@ -13,6 +13,7 @@
 
 这里使用的 JavaScript 函数式库是 [Eweda](https://rawgit.com/CrossEye/eweda/master/docs/eweda.html)([Ramda](https://rawgit.com/CrossEye/ramda/master/docs/ramda.html)的更函数式的实现,  Eweda 更函数式, 但是 Ramda 要更 pratical 一些)
 
-> **Comment**[为什么不用 Underscore](http://fr.umio.us/why-ramda/)这个话题我会放到第二章, 因为我不想在开始的时候讲, 在没有柯里化以及函数组合的概念之前根本解释不了.
+> **Comment**[为什么不用 Underscore](http://fr.umio.us/why-ramda/)这个话题还可以讲一章,我就放到附录吧,因为我不想在开始的时候讲,估计也不好体会.
 
-第3, 4章 tobe continue
+> **Note** 由于会介绍 ECMAScript 6 的新特性, 书中很多写法都是 ECMAScript 6 标准, 只能在实现这些 feature 的浏览器(如 Firefox, 请目前参照各浏览器的[实现情况](http://kangax.github.io/compat-table/es6/))里运行. 另外, 大多数的例子源码都会在文章里的 jsbin 链接里.
+
