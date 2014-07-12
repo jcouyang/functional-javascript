@@ -9,6 +9,7 @@
   "author": "Jichao Ouyang <oyanglulu@gmail.com>",
   "dependencies": {
     "gitbook-plugin-richquotes": "0.0.3",
-    "gitbook-plugin-jsbin": "0.0.1"
+			"gitbook-plugin-jsbin": "0.0.1",
+			"gitbook-plugin-mixpanel":""
   }
 }
