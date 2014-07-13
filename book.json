@@ -24,11 +24,9 @@
         }
     },
 		"links": {
-        // Link to home in the top-left corner
         "home": "http://jcouyang.gitbooks.io",
-
-        // Links in top of sidebar
         "about": "http://oyanglul.us",
         "issues": "https://github.com/jcouyang/functional-javascript/issues",
-        "contribute": "https://github.com/jcouyang/functional-javascript",
+        "contribute": "https://github.com/jcouyang/functional-javascript"
+		}
 }
