@@ -110,5 +110,5 @@ Functor(Function, {
 
 好吧, 通过如何实现和使用一个简单的 Functor, 概念上已经估计可以理解了, 我们回过头来看看 Either 是神马玩意.
 
-<a class="jsbin-embed" href="http://jsbin.com/xezun/1/embed?js,console">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
+<a class="jsbin-embed" href="http://jsbin.com/xezun/1/embed?js,console">JS Bin</a>
 
