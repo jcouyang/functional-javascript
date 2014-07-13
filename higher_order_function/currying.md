@@ -140,4 +140,4 @@ var plus = ramda.curry(function(a, b){
 })
 ```
 
-<a class="jsbin-embed" href="http://jsbin.com/hamoq/3/embed?js,console">JS Bin</a><script src="http://static.jsbin.com/js/embed.js"></script>
+[完整代码](http://jsbin.com/hamoq/3/embed?js,console)

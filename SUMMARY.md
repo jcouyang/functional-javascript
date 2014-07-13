@@ -12,4 +12,5 @@
 * [Functor & Monad](functor_&_monad/README.md)
    * [Functor](functor_&_monad/functor.md)
    * [Monad](functor_&_monad/monad.md)
+* [Appendix](appendix/README.md)
 
