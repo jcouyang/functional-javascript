@@ -1,19 +1,19 @@
 {
     "plugins": [
-				"mixpanel",
+        "mixpanel",
         "richquotes",
-				"jsbin",
-				"ga"
+        "jsbin",
+        "ga"
     ],
     "pluginsConfig": {
         "richquotes": {
             "todos": true
         },
-				"mixpanel": {
-						"token": "04b882f603277dd5498776d62145ad92"
-				},
-				"ga": {
-						"token": "UA-32314154-1"
-				}
+        "mixpanel": {
+            "token": "04b882f603277dd5498776d62145ad92"
+        },
+        "ga": {
+            "token": "UA-32314154-1"
+        }
     }
 }
