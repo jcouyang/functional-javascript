@@ -9,7 +9,7 @@
     ],
     "pluginsConfig": {
         "fontSettings": {
-            "theme": "night",
+            "theme": "white",
             "family": "serif",
             "size": 4
         },
@@ -23,10 +23,10 @@
             "token": "UA-32314154-1"
         }
     },
-		"links": {
+    "links": {
         "home": "http://jcouyang.gitbooks.io",
         "about": "http://oyanglul.us",
         "issues": "https://github.com/jcouyang/functional-javascript/issues",
         "contribute": "https://github.com/jcouyang/functional-javascript"
-		}
+    }
 }
