@@ -48,7 +48,7 @@ new Multipler(2).multiple([1,2,3,4]) // => [NaN, NaN, NaN, NaN]  不 work, 因�
 Multipler.prototype.multiple = function(numbers){
   var self = this; // 保持 Multipler 的 this 的缓存
   return numbers.map(function(number){
-    return this.inc * number;
+    return self.inc * number;
   })
 }
 new Multipler(2).multiple([1,2,3,4]) // => [ 2, 4, 6, 8 ]
