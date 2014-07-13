@@ -1,4 +1,6 @@
 {
+    "github": "https://github.com/jcouyang/functional-javascript.git",
+    "githubHost": "https://github.com/",
     "plugins": [
         "mixpanel",
         "richquotes",
@@ -6,6 +8,11 @@
         "ga"
     ],
     "pluginsConfig": {
+        "fontSettings": {
+            "theme": "night",
+            "family": "serif",
+            "size": 4
+        },
         "richquotes": {
             "todos": true
         },
@@ -15,5 +22,13 @@
         "ga": {
             "token": "UA-32314154-1"
         }
-    }
+    },
+		"links": {
+        // Link to home in the top-left corner
+        "home": "http://jcouyang.gitbooks.io",
+
+        // Links in top of sidebar
+        "about": "http://oyanglul.us",
+        "issues": "https://github.com/jcouyang/functional-javascript/issues",
+        "contribute": "https://github.com/jcouyang/functional-javascript",
 }
