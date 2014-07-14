@@ -1,4 +1,7 @@
 # 模式匹配(Pattern Matching)
+![](http://reasontostand.org/wp-content/uploads/2010/12/matchingshapes_2.jpg)
+
+模式匹配意思是可以规定一种模式, 比如上图中那些坑的形状, 程序会把对应形状的数(积)据(木)放入匹配的坑中.
 
 ### destructuring
 如果你用过 python 或 ruby 什么的， 可能会记得可以这样写
@@ -12,19 +15,20 @@ b, a = (a, b) # a=>2, b=>1
 
 这就是 destructuring patterns, 这跟模式匹配有毛关系啊. 这里等号左边就是pattern (模式), 模式匹配就是吧右边的玩意按左边的模式匹配过来.
 
-目前[ES6](http://kangax.github.io/compat-table/es6/#Destructuring) 已经支持了 destructuring, 记得还是用firefox
+目前[ES6](http://kangax.github.io/compat-table/es6/#Destructuring) 已经支持了 destructuring, 而且还可 destructure 对象
+> **note** 记得还是用firefox
 
 ```js
-function someObject(){
+function hello(name){
     return {
-        name: "world",
+        name: name,
         greet:{
             cn: "你好",
             en: "hello"
         }
     }
 }
-var {name:a, greet:{cn:b}} = someObject();
+var {name:a, greet:{cn:b}} = hello('world');
 // a => world
 // b => 你好
 ```
@@ -37,8 +41,15 @@ var {name:a, greet:{cn:b}} = someObject();
 
 恭喜你, 同样的在 es6中你也可以这么写了
 ```js
-[for (x of [0,1,2,3,4]) x*2]
+[x*2 for (x of [0,1,2,3,4])]
 ```
 
-让我们配合下前面的模式匹配来干这么个事情, 把前面
-> **todos** TODO
+让我们配合下前面的模式匹配来干这么个事情, 有一个 hello 对象数组, 我们要把里面的 greet 中文拿出来，连上一个名字, 再组成数组.
+```js
+[cn+name for ({name, greet:{cn}} of [hello('Li Lei'), hello('Han MeiMei')])]
+// => ['你好Li Lei', '你好Han MeiMei']
+```
+
+是不是觉得模式匹配非常有用了.
+
+> **comment** 在 haskell 中函数也可以用模式匹配, 但是 javascript 没有类型系统, 因此不好实现. 比如`hello`在 Haskell 中的类型是 `hello::(String a, HashTable b) -> a -> b`, 而在 javascript 定义的 hello 你可以往里传任何东西, 完全不检查类型.

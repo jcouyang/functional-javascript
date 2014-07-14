@@ -65,4 +65,9 @@ E.map(completedAndSorted)(groupedTasks)
 
 而 underscore 要么是以对象保持中间数据, 用 chaining 的方式对目标应用各种函数, 要么用函数嵌套函数, 将目标一层层传递下去.
 
-
+-----
+类似 compose, eweda 还有一个方法叫 pipe, pipe 的函数执行方向刚好与 compose 相反. 比如 `pipe(f, g)`, `f`会先执行, 然后结果传给` g`, 是不是让你想起了 bash 的 pipe
+```
+find / | grep porno
+```
+没错,他们都是一个意思. 而且这个函数执行的方向更适合人脑编译(可读)一些.
