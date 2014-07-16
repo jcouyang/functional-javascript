@@ -36,6 +36,7 @@ Right("deadcat").bind(cat => 'hulk' + cat)
 
 我们这边假设两边的鸟差异在三个之内的时候，皮尔斯仍能保持平衡。
 
+#### 一般解法
 首先看看不用 Monad 怎么解
 ```js
 eweda.installTo(this);
@@ -43,7 +44,7 @@ var landLeft = eweda.curry(function(n, pole){
     return [pole[0]+n, pole[1]];
 });
 var landRight = eweda.curry(function(n, pole){
-    return [pole[0], pole[1]+n];
+    return landLeft(n, eweda.reverse(pole));
 });
 var result = eweda.pipe(landLeft(1), landRight(1), landLeft(2))([0,0]);
 console.log(result);
@@ -54,16 +55,97 @@ console.log(result);
 
 ```js
 var landLeft = eweda.curry(function(n, pole){
-    if(pole==='dead' || Math.abs(pole[0]-pole[1]) > 3)
+    if(pole==='dead') return pole;
+    if(Math.abs(pole[0]-pole[1]) > 3)
       return 'dead';
     return [pole[0]+n, pole[1]];
 });
 var landRight = eweda.curry(function(n, pole){
     if(pole==='dead') return pole;
-    landLeft(n, eweda.reverse(pole))
+    return landLeft(n, eweda.reverse(pole));
 });
-var result = eweda.pipe(landLeft(1), landRight(1), landLeft(2))([0,0]);
+var result = eweda.pipe(landLeft(10), landRight(1), landRight(8))([0,0]);
 console.log(result);
-
+// => dead
 ```
+
+[完整代码](http://jsbin.com/pozim/8/watch?js,console,output)
+
+------
+#### 现在来试试用 Either
+
+我们先把皮尔斯放进 Either 盒子里, 这样皮尔斯的状态只有打开 Either 才能看见. 假设 Either Right 是活着, Left 的话皮尔斯挂了.
+
+```js
+var landLeft = eweda.curry(function(n, pole){
+    if(Math.abs(pole[0]-pole[1]) > 3)
+      return Left('dead');
+    return Right([pole[0]+n, pole[1]]);
+});
+var landRight = eweda.curry(function(n, pole){
+    return landLeft(n, eweda.reverse(pole));
+});
+```
+现在落鸟后会返回一个 Either, 要不活着, 要不挂了. 打开盒子的函数可以是这样的
+```js
+var stillAlive = function(x){
+    console.log(x)
+}
+var dead = function(x){
+    console.log('皮尔斯' + x);
+}
+either(dead, stillAlive, landLeft(2, [0,0]))
+```
+
+好吧, 好像有一点点像了, 但是这只落了一次鸟, 如果我要落好几次呢. 这就需要实现 Either 的 >>= bind 方法了, 如果你还记得前面实现的 Functor, 这里非常像 :
+
+```js
+Left = Right = function(value){
+    this.value = value;
+}
+Monad(Left, {
+    value:null
+    fmap: (fn, obj) => this
+    bind: (fn) => fmap(fn, this.value)
+})
+Monad(Right, {
+    value:null
+    fmap: (fn, obj) => Right(fn(obj))
+    bind: (fn) => fmap(fn, this.value)
+})
+```
+
+
+哦, 对了, either:
+```js
+either = function(left, right, either){
+    if(either.constructor.name === 'Right')
+        return right(either.value)
+    else
+        return left(either.value)
+}
+```
+
+我们来试试工作不工作.
+
+```js
+var landingBird = landLeft(2).bind(landRight(3)).bind(landLeft(1))
+either(dead, stillAlive, landingBird([0,0]))
+// => [3,3]
+landingBird = landLeft(2).bind(landRight(3)).bind(landRight(3))
+either(dead, stillAlive, landingBird([0,0]))
+// => sorry, 皮尔斯挂了
+```
+
+### 到底有什么用呢, Monad
+我们来总结下两种做法有什么区别:
+1. 一般做法每次都会检查查尔斯挂了没挂, 也就是重复获得之前操作的 context
+2. Monad 不对异常做处理, 只是不停地往盒子里加操作
+2. Monad 互相传递的只是盒子, 而一般写法会把异常往下传如`"dead"`, 这样导致后面的操作都得先判断这个异常.
+
+> **comment** 由于是用 JavaScript, pole 不限定类型, 所以这里单纯的用字符串代表 pole 的异常状态. 但如果换成强类型的 Java, 可能实现就没这么简单了.
+
+
+看来已经优势已经逐步明显了呢, Monad 里面保留了值的 context, 也就是我们对这个 Monad 可以集中在单独的本次如何操作value, 而不用关心 context.
+
 
