@@ -4,7 +4,7 @@
 
 Monad 这个黑盒子, 里面到底卖的神马药,我们要打开喝了才知道.
 
-等等, 不是说好要解释 Either 的吗, 嗯嗯, 这里就是在解释 Either. 上节说 Either 是一个 Functor, 可以被 fmap over. 怎么这里又说道黑盒子了? 好吧, Either 也是 Monad.
+等等, 不是说好要解释 Either 的吗, 嗯嗯, 这里就是在解释 Either. 上节说 Either 是一个 Functor, 可以被 fmap over. 怎么这里又说道黑盒子了? 好吧, Monad 其实也是 Functor.
 
 ### Either
 先来看看 Either 这种类型会干什么事情. [Either ](http://hackage.haskell.org/package/base-4.7.0.0/docs/Data-Either.html#t:Either)表示要不是左边就是右边的值, 因此我们可以用它来表示薛定谔猫, 要不是活着, 要不死了. Either 还有个方法:
@@ -14,7 +14,7 @@ either
 ```
 想必你已经对箭头`->`非常熟了吧.如果前面几章你都跳过了,我再翻译下好了. 这里表示接收函数`a->c`和函数` b->c`, 再接收一个 Either, 如果 Either 的值在左边,则使用函数映射` a->c`, 若值在右边,则应用第二个函数映射` b->c`.
 
-作为 Monad, 它还必须具备一个方法 '>>='(这个符号好眼熟的说), 也就是 bind 方法.
+作为 Monad, 它还必须具备一个方法 '>>='(这个符号好眼熟的说, 看看 haskell 的 logo, 你就知道 Monad 是有多重要), 也就是 bind 方法.
 
 ![](http://www.haskell.org/wikistatic/haskellwiki_logo.png)
 
@@ -77,14 +77,16 @@ console.log(result);
 我们先把皮尔斯放进 Either 盒子里, 这样皮尔斯的状态只有打开 Either 才能看见. 假设 Either Right 是活着, Left 的话皮尔斯挂了.
 
 ```js
-var landLeft = eweda.curry(function(n, pole){
-    if(Math.abs(pole[0]-pole[1]) > 3)
-      return Left('dead');
-    return Right([pole[0]+n, pole[1]]);
+var land = eweda.curry(function(lr, n, pole){
+    pole[lr] = pole[lr] + n;
+    if(Math.abs(pole[0]-pole[1]) > 3) {
+      return new Left("dead when land " + n + " became " + pole);
+    }
+    return new Right(pole);
 });
-var landRight = eweda.curry(function(n, pole){
-    return landLeft(n, eweda.reverse(pole));
-});
+
+var landLeft = land(0)
+var landRight = land(1);
 ```
 现在落鸟后会返回一个 Either, 要不活着, 要不挂了. 打开盒子的函数可以是这样的
 ```js
@@ -100,19 +102,31 @@ either(dead, stillAlive, landLeft(2, [0,0]))
 好吧, 好像有一点点像了, 但是这只落了一次鸟, 如果我要落好几次呢. 这就需要实现 Either 的 >>= bind 方法了, 如果你还记得前面实现的 Functor, 这里非常像 :
 
 ```js
-Left = Right = function(value){
-    this.value = value;
+var Monad = function(type, defs) {
+  for (name in defs){
+    type.prototype[name] = defs[name];
+  }
+  return type;
+};
+function Left(value){
+  this.value = value
 }
-Monad(Left, {
-    value:null
-    fmap: (fn, obj) => this
-    bind: (fn) => fmap(fn, this.value)
-})
+function Right(value){
+  this.value=value;
+}
+
 Monad(Right, {
-    value:null
-    fmap: (fn, obj) => Right(fn(obj))
-    bind: (fn) => fmap(fn, this.value)
+  bind:function(fn){
+    return fn(this.value)
+  }
 })
+
+Monad(Left, {
+  bind: function(fn){
+    return this;
+  }
+})
+
 ```
 
 
@@ -129,23 +143,31 @@ either = function(left, right, either){
 我们来试试工作不工作.
 
 ```js
-var landingBird = landLeft(2).bind(landRight(3)).bind(landLeft(1))
-either(dead, stillAlive, landingBird([0,0]))
-// => [3,3]
-landingBird = landLeft(2).bind(landRight(3)).bind(landRight(3))
-either(dead, stillAlive, landingBird([0,0]))
-// => sorry, 皮尔斯挂了
+var walkInLine = new Right([0,0]);
+eitherDeadOrNot = walkInLine.bind(landLeft(2))
+    .bind(landRight(5))
+either(dead, stillAlive, eitherDeadOrNot)
+// => [2,5]
+eitherDeadOrNot = walkInLine.bind(landLeft(2))
+  .bind(landRight(5))
+  .bind(landLeft(3))
+  .bind(landLeft(10)
+  .bind(landRight(10)))
+
+either(dead, stillAlive, eitherDeadOrNot)
+// => "皮尔斯dead when land 10 became 15,5"
 ```
+[完整代码](http://jsbin.com/giyig/3/watch)
 
 ### 到底有什么用呢, Monad
 我们来总结下两种做法有什么区别:
 1. 一般做法每次都会检查查尔斯挂了没挂, 也就是重复获得之前操作的 context
-2. Monad 不对异常做处理, 只是不停地往盒子里加操作
-2. Monad 互相传递的只是盒子, 而一般写法会把异常往下传如`"dead"`, 这样导致后面的操作都得先判断这个异常.
+2. Monad 不对异常做处理, 只是不停地往盒子里加操作. 你可以看到对错误的处理推到了最后取值的 either.
+2. Monad 互相传递的只是盒子,  而一般写法会把异常往下传如`"dead"`, 这样导致后面的操作都得先判断这个异常.
 
 > **comment** 由于是用 JavaScript, pole 不限定类型, 所以这里单纯的用字符串代表 pole 的异常状态. 但如果换成强类型的 Java, 可能实现就没这么简单了.
 
 
 看来已经优势已经逐步明显了呢, Monad 里面保留了值的 context, 也就是我们对这个 Monad 可以集中在单独的本次如何操作value, 而不用关心 context.
 
-
+> 还有一个 Monad 叫做 Maybe, 实际上皮尔斯的🌰用 Maybe 更为合适, 因为 Maybe 有两种状态, 一种是有值 Just, 一种是没东西 Nothing, 可以自己实现试试.
