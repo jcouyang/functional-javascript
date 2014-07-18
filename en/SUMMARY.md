@@ -1,9 +1,9 @@
 # Summary
 
-* [lambda](lambda/README.md)
-   * [anonymous function](lambda/anonymous_function.md)
-   * [arrow function](lambda/arrow_function.md)
-* [Higher-order function)](higher_order_function/README.md)
+* [Lambda](lambda/README.md)
+   * [Anonymous Function](lambda/anonymous_function.md)
+   * [Arrow Function](lambda/arrow_function.md)
+* [Higher-order function](higher_order_function/README.md)
    * [high-order function](higher_order_function/high-order_function.md)
    * [map reduce filter](higher_order_function/map_reduce.md)
    * [currying](higher_order_function/currying.md)
