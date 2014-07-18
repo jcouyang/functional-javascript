@@ -31,36 +31,36 @@ Precisely speaking, let's look at into the mapping process above:
 
 1. We create a lambda accepting only one parameter:
 
-```
-(x) -> (y -> x*y)  // lambda A
-```
+    ```
+    (x) -> (y -> x*y)  // lambda A
+    ```
 
 1. lambda A gives (returns) us another lambda which also accepts one parameter:
 
-```
-(y -> x*y)             // lambda B, which is returned from inside of lambda A
-```
+    ```
+    (y -> x*y)             // lambda B, which is returned from inside of lambda A
+    ```
 
 1. For example, we pass number 5 into lambda A:
 
-```
-(5) -> (y -> 5*y)
-```
+    ```
+    (5) -> (y -> 5*y)
+    ```
 
 1. Then we get another lambda B1, with number 5 in it:
 
-```
-(y -> 5*y)             // lambda B1
-```
+    ```
+    (y -> 5*y)             // lambda B1
+    ```
 
 1. This lambda `y -> 5*y` is a mapping from `y` to `5*y`, if we pass number 4 into lambda B1, we get:
 
-```
-4 -> 5*4
-```
+    ```
+    4 -> 5*4
+    ```
 
-That is, the anonymous function  `(x,y)->x*y` is the combination of two lambdas, instead of one lambda as it looks like.
+That is, the anonymous function `(x,y)->x*y` is the combination of two lambdas, instead of one lambda as it looks like.
 
 The way that a function accepting single parameter returns another function that accepts the second single parameter is called Curring. We will talk about Curring more in Chapter 02.
 
-这里我们先忍一忍, Let's look at lambda in JavaScript at first.
+We put Curring aside, and let's look at lambda in JavaScript at first.

@@ -54,7 +54,7 @@ Multipler.prototype.multiple = function(numbers){
 }
 new Multipler(2).multiple([1,2,3,4]) 
 // => [NaN, NaN, NaN, NaN]  
-// not worked as we expected,  because this.inc in map refers to global variable window
+// not worked as we expected, because this.inc in map refers to global variable window
 
 Multipler.prototype.multiple = function(numbers){
   var self = this; // refer self to Multipler
