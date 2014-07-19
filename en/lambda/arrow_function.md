@@ -34,10 +34,9 @@ var a = [1,2,3,4,5];
 a.map(x => x*2);
 ```
 
-We only remove `function`, `return` and block, right? If you think the difference is not significance, you may just get used to traditional anonymous function in JavaScript. `function`, `return` and block do not explicitly exist in our code.
- 只是少了` function` 和` return` 以及 block, 不是吗? 如果觉得差不多, 因为你看惯了 JavaScript 的匿名函数, 你的大脑编译器自动的忽略了,因为他们不需要显示的存在.
+We only remove `function`, `return` and block, right? If you think the difference is not significance, you may just get used to traditional anonymous function in JavaScript. Howerver, all of `function`, `return` and block do not need to be explicitly existed in our code.
  
- However, ` map(x => x*2)` makes more sense. Because the anonymous function we need is supposed to do only one thing. That is, we need a function `f` that maps `x` to `y`. A best representation for this requirement is `f = (x => x*2)`. 
+Arrow function like ` map(x => x*2)` makes more sense. Because the anonymous function we need has only one thing to do. That is, we need a function `f` that maps `x` to `y`. The best representation for this requirement is `f = (x => x*2)`. 
 
 ### Lexical `this`
 
@@ -54,7 +53,8 @@ Multipler.prototype.multiple = function(numbers){
 }
 new Multipler(2).multiple([1,2,3,4]) 
 // => [NaN, NaN, NaN, NaN]  
-// not worked as we expected, because this.inc in map refers to global variable window
+// not worked as we expected, 
+// because this.inc in map refers to global variable window
 
 Multipler.prototype.multiple = function(numbers){
   var self = this; // refer self to Multipler
@@ -64,7 +64,7 @@ Multipler.prototype.multiple = function(numbers){
 }
 new Multipler(2).multiple([1,2,3,4]) // => [ 2, 4, 6, 8 ]
 ```
-Weird, right? 确实是 Javascript 的一个 bug. This become a question in many interviews.
+Weird, right? It is a bug in JavaScript, But it becomes a question in many interviews.
 
 How about using arrow function:
 

@@ -18,7 +18,7 @@ A expression returns value:
 var a = new Array()  // new Array() is an expression, and the whole line is called a statement.
 ```
 
-But why the error says: `function statement requires a name`. Because there is another way to create a function, that is function statement. The code above is treated as function statement, 因为并没有期待值. But a statement requires a name.
+But why the error says: `function statement requires a name`. In JavaScript, there is another way to declare a function, that is using function statement. A statement requires a name. The code above is treated as function statement, because it returns nothing. Therefore, we got the error.
 
 If we assign `function (x){return x*x}` to a variable, or pass it as a parameter, we will not get any SyntaxError, because `function (x){return x*x}` is only a expression under this circumstance. For instance:
 
@@ -50,8 +50,7 @@ console.log(function(x){ return x*x});
 // => function ()
 ```
 
-The `undefined` is the return value for `console.log()`, and `function()` is 
-因此 `function()`则是打印出来的 function 表达式穿件的匿名函数.
+The `undefined` is the return value for `console.log()`, and `function()` is the return value from function expression that defines an anonymous function.
 
 ### Use Anonymous Function
 
