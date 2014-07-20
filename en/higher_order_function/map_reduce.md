@@ -1,11 +1,17 @@
 # map fold filter
 
 本节结束高阶函数的典型应用 map, fold/reduce(个人认为fold 比 reduce 形象多了).
+// 结束 - 介绍
+We talk about `map`, `fold` and `reduce` of classic usage of higher-order function. (作者按：`fold` is best than `reduce`).
 
 ![](http://www.backpacker.com/2007/images/september2010/mapfolding_200x170.png)
 map 是对列表中每个元素应用特定操作( applying the function), 返回结果列表
 
+`map` applies a function to each element in list, and returns a result list.
+
 fold 则是把元素进行"叠加"( 所以说fold比较形象), 最终叠成一个值, 一个数组或一个对象. fold 还可以分为两种, foldl, 从左开始叠, 以及 foldr, 从右开始叠.
+
+
 
 filter 则跟名字一样, 按照一定的方式过滤数组.
 
