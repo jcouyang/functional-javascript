@@ -1,11 +1,10 @@
 # map fold filter
 
-We'll talk about the classic usage of higher-order function, `map`, and `fold`/`reduce`. (`fold` is more suitable for describing it's behaviour ).
+We will talk about the classic usage of higher-order function: `map`, `fold/reduce` (in [my](https://github.com/jcouyang) opinion, the name `fold` is more straightfoward then `reduce`).
 
 ![](http://www.backpacker.com/2007/images/september2010/mapfolding_200x170.png)
 
-<<<<<<< HEAD
-`map` applies a function to each element in list, and returns a result list.
+`map` applies a specific function on each element of list, then returns a new list.
 
 `fold` folds all of the elements, and finally returns a single value, a single array or a single Object. We have two types of `fold`: `foldl` folds elements from left to right, while, `foldr` folds elements from right to left.
 
