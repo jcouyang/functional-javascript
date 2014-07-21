@@ -4,7 +4,7 @@
 
 Monad 这个黑盒子, 里面到底卖的神马药,我们要打开喝了才知道.
 
-等等, 不是说好要解释 Either 的吗, 嗯嗯, 这里就是在解释 Either. 上节说 Either 是一个 Functor, 可以被 fmap over. 怎么这里又说道黑盒子了? 好吧, Monad 其实也是 Functor.
+等等, 不是说好要解释 Either 的吗, 嗯嗯, 这里就是在解释 Either. 上节说 Either 是一个 Functor, 可以被 fmap over. 怎么这里又说道黑盒子了? 好吧, Monad 其实也是 Functor. 还记得我说的 Functor 其实是一个带 context 的盒子吗. 而 fmap 使得往盒子里应用函数变换成为了可能.
 
 ### Either
 先来看看 Either 这种类型会干什么事情. [Either ](http://hackage.haskell.org/package/base-4.7.0.0/docs/Data-Either.html#t:Either)表示要不是左边就是右边的值, 因此我们可以用它来表示薛定谔猫, 要不是活着, 要不死了. Either 还有个方法:
@@ -171,3 +171,74 @@ either(dead, stillAlive, eitherDeadOrNot)
 看来已经优势已经逐步明显了呢, Monad 里面保留了值的 context, 也就是我们对这个 Monad 可以集中在单独的本次如何操作value, 而不用关心 context.
 
 > 还有一个 Monad 叫做 Maybe, 实际上皮尔斯的🌰用 Maybe 更为合适, 因为 Maybe 有两种状态, 一种是有值 Just, 一种是没东西 Nothing, 可以自己实现试试.
+
+### Monad 在 JavaScript 中的应用
+你知道 ES6有个新的 类型 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Browser_compatibility) 吗, 如果不知道, 想必也听过 jQuery 的 `$.ajax`吧, 但如果你没听过 promise, 说明你没有认真看过他的返回值:
+```js
+var aPromise = $.ajax({
+    url: "https://api.github.com/users/jcouyang/gists"
+    dataType: 'jsonp'
+    })
+aPromise /***
+=> Object { state: .Deferred/r.state(),
+    always: .Deferred/r.always(),
+    then: .Deferred/r.then(),
+    promise: .Deferred/r.promise(),
+    pipe: .Deferred/r.then(),
+    done: b.Callbacks/p.add(),
+    fail: b.Callbacks/p.add(),
+    progress: b.Callbacks/p.add() }
+***/
+```
+
+我们看到返回了好多`Deferred`类型的玩意, 我们来试试这玩意有什么用
+```js
+anotherPromise = aPromise.then(_ => _.data.forEach(y=> console.log(y.description)))
+/* =>
+Object { state: .Deferred/r.state(),
+    always: .Deferred/r.always(),
+    then: .Deferred/r.then(),
+    promise: .Deferred/r.promise(),
+    pipe: .Deferred/r.then(),
+    done: b.Callbacks/p.add(),
+    fail: b.Callbacks/p.add(),
+    progress: b.Callbacks/p.add() }
+
+"connect cisco anyconnect in terminal"
+"为什么要柯里化（curry）"
+"批量获取人人影视下载链接"
+......
+*/
+```
+看见没有, 他又返回了同样一个东西, 而且传给 then 的函数可以操作这个对象里面的值. 这个对象其实就是 Promise 了. 为什么说这是 Monad 呢, 来试试再写一次`走钢丝`:
+
+> 这里我们用的是 ES6 的 Promise, 而不用 jQuery Defered, 记得用 firefox 哦. 另外 eweda 可以这样装
+```
+var ewd = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            ewd.src = 'https://rawgit.com/CrossEye/eweda/master/eweda.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ewd);
+eweda.installTo(this);
+```
+
+```js
+var land = eweda.curry(function(lr, n, pole){
+    pole[lr] = pole[lr] + n;
+    if(Math.abs(pole[0]-pole[1]) > 3) {
+      return new Promise((resovle,reject)=>reject("dead when land " + n + " became " + pole));
+    }
+    return new Promise((resolve,reject)=>resolve(pole));
+});
+
+var landLeft = land(0)
+var landRight = land(1);
+
+Promise.all([0,0])
+.then(landLeft(2), _=>_)
+.then(landRight(3), _=>_) // => Array [ 2, 3 ]
+.then(landLeft(10), _=>_)
+.then(landRight(10), _=>_)
+.then(_=>console.log(_),_=>console.log(_))
+// => "dead when land 10 became 12,3"
+```
+
+这下是不承认 Promise 就是 Monad 了. 原来我们早已在使用这个神秘的 Monad, 再想想 Promise,也没有那么抽象和神秘了.
