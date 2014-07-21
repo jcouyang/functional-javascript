@@ -24,4 +24,5 @@ I chose [Eweda](https://rawgit.com/CrossEye/eweda/master/docs/eweda.html) as fun
 > **Note** In case I will write some code in ECMAScript 6 or (draft) standard, you better use firefox to run all those (who looks weird) examples. Simply tell what feature your browser has implement [here](http://kangax.github.io/compat-table/es6/)). Anyway, most long example will be followed by a jsbin.
 
 
-If you're not feeling right about any of my point of view, just post issue or pull request to me.
+--------------
+> Thanks to [@scott](https://github.com/scotv) who translated all this into English.
