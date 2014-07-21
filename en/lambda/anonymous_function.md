@@ -1,66 +1,79 @@
-# 匿名函数(anonymous function)
+# Anonymous Function
 
-支持匿名函数, 也就意味着函数可以作为一等公民. 可以被当做参数, 也可以被当做返回值.因此, JavaScript 的支持一等函数的函数式语言, 而且定义一个匿名函数式如此简单.
+Supporting anonymous function means we can place a function as first order member. So that a function can be passed as a parameter, and returned as a value. JavaScript is a functional programming language. It supports first order function and allow us to define an anonymous function easily.
 
-### 创建一个匿名函数
+### Define Anonymous Function
+
 ```js
 function(x){
     return x*x;
 }// => SyntaxError: function statement requires a name
 ```
-为什么报错了这里. 因为创建一个匿名函数需要用表达式(function expression).
-表达式是会返回值的:
-``` js
-var a = new Array() // new Array 是表达式, 而这整行叫语句 statement
-```
-但为什么说 `function statement requires a name`. 因为 JavaScript 还有一种创建函数的方法--function statement.
-而在上面这种写法会被认为是一个 function 语句, 因为并没有期待值. 而 function 语句声明是需要名字的.
 
-简单将这个函数赋给一个变量或当参数传都不会报错, 因为这时他没有歧义,只能是表达式.比如:
+Why we get a SyntaxError here? Because we need a function expression to create an anonymous function.
+
+A expression returns value:
+
+``` js
+var a = new Array()  // new Array() is an expression, and the whole line is called a statement.
+```
+
+But why the error says: `function statement requires a name`. In JavaScript, there is another way to declare a function, that is using function statement. A statement requires a name. The code above is treated as function statement, because it returns nothing. Therefore, we got the error.
+
+If we assign `function (x){return x*x}` to a variable, or pass it as a parameter, we will not get any SyntaxError, because `function (x){return x*x}` is only a expression under this circumstance. For instance:
+
 ```js
 var squareA = function(x){
     return x*x;
 }
 ```
-但是这里比较 tricky 的是这下 `squareA` 其实是一个具名函数了.
+
+However, a tricky thing is that `squareA` becomes a named function.
+
 ```
-console.log(squareA) // => function squareA()
+console.log(squareA)  // => function squareA()
 ```
 
-虽然结果是具名函数,但是过程却与下面这种声明的方式不一样.
+Even `squareA` becomes a named function, but the definition process is different from code below:
 
 ```js
 function squareB(x){
     return x*x;
 } // => undefined
 ```
-`squareB` 用的是 function statement 直接声明(显然 statement 没有返回), 而` squareA` 则是先用 function expression 创建一个匿名函数, 然后将返回的函数赋给了名为` squareA` 的变量. 因为表达式是有返回的:
+
+`squareB`  directly defines a function using function statement that obviously has no return. While, `squreA` defines an anonymous function using function expression, and assigns the function returned from function expression to a variable named `squareA`. So, a expression returns a value:
+
 ```
 console.log(function(x){ return x*x});
 // => undefined
 // => function ()
 ```
-第一个 undefined 是 console.log 的返回值, 因此 `function()`则是打印出来的 function 表达式穿件的匿名函数.
 
-### 使用匿名函数
-JavaScript 的函数是一等函数. 这意味着我们的函数
+The `undefined` is the return value for `console.log()`, and `function()` is the return value from function expression that defines an anonymous function.
 
-可以赋给变量:
+### Use Anonymous Function
+
+Function is treated as first order, that means we can assign a function to a variable:
+
 ```js
 var square = function(x) {return x*x}
 ```
-可以当参数, 如刚才见到的:
+
+We also pass the anonymous function as a parameter, like before we passed an anonymous function to ` console.log`:
+
 ```js
  console.log(function(x){return x*x})
 ```
-将函数传给了` console.log`
 
-可以被返回:
+And, we return a function as a return value:
+
 ```js
 function multiply(x){
     return function(y){
         return x*y;
     }
 }
+
 multiply(1)(2) // => 2
 ```
