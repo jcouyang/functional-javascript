@@ -1,9 +1,10 @@
 # map fold filter
 
-本节结束高阶函数的典型应用 map, fold/reduce(个人认为fold 比 reduce 形象多了).
+We will talk about the classic usage of higher-order function: `map`, `fold/reduce` (in [my](https://github.com/jcouyang) opinion, the name fold is more vivid than the name reduce).
 
 ![](http://www.backpacker.com/2007/images/september2010/mapfolding_200x170.png)
-map 是对列表中每个元素应用特定操作( applying the function), 返回结果列表
+
+`map` applies a specific function on each element of list, then returns a new list.
 
 `fold` folds all of the elements, and finally returns a single value, a single array or a single Object. We have two types of `fold`: `foldl` folds elements from left to right, while, `foldr` folds elements from right to left.
 
