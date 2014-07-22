@@ -5,11 +5,11 @@ This tiny book may only take you 2 hours to read, but it may take you to a journ
 
 If you're kind of:
 
-![](/en/images/i have no idea what im doing.jpg)
+![](https://raw.githubusercontent.com/jcouyang/functional-javascript/master/en/images/i%20have%20no%20idea%20what%20im%20doing.jpg)
 
 Plz read [Learn JavaScript](https://www.gitbook.io/book/gitbookio/javascript) first, but if you're just like:
 
-![](/en/images/function inside function.jpg)
+![](https://raw.githubusercontent.com/jcouyang/functional-javascript/master/en/images/function inside function.jpg)
 
 this book may help you functional stuff at some point.
 
