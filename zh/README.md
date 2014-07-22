@@ -4,12 +4,13 @@
 这是一本你可能2小时就能看完的小书，但是涵盖了基本所有函数式编程的内容，还包含了一些 ECMAScript 6 定义的函数式新特性, 如箭头函数, 模式匹配等等. 还会介绍函数式一些重要概念在 JavaScript是如何实现即应用, 以及如何以函数式的思想编写 JavaScript 代码.
 
 如果你属于:
-![](/en/images/i have no idea what im doing.jpg)
+
+![](https://raw.githubusercontent.com/jcouyang/functional-javascript/master/en/images/i%20have%20no%20idea%20what%20im%20doing.jpg)
 
 
 可能本书并不适合你, 请先移步[Learn JavaScript](https://www.gitbook.io/book/gitbookio/javascript), 但如果函数式对你来说:
 
-![](/en/images/function inside function.jpg)
+![](https://raw.githubusercontent.com/jcouyang/functional-javascript/master/en/images/function inside function.jpg)
 
 那么这本书将会对你会有所帮助.
 
