@@ -1,6 +1,6 @@
 # map fold filter
 
-We will talk about the classic usage of higher-order function: `map`, `fold/reduce` (in [my](https://github.com/jcouyang) opinion, the name `fold` is more straightfoward then `reduce`).
+We will talk about the typical usage of higher-order function: `map`, `fold/reduce` (in [my](https://github.com/jcouyang) opinion, the name `fold` is more straightfoward then `reduce`).
 
 ![](http://www.backpacker.com/2007/images/september2010/mapfolding_200x170.png)
 
