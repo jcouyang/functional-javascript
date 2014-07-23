@@ -1,10 +1,10 @@
 # Lambda
 
-Why we need to talk about lambda, aka. λ, at first?
+Why we need to talk about lambda, aka. λ, at the very beginning?
 
 ![](http://images.wikia.com/half-life/en/images/archive/3/3a/20120621181904!Lambda_reactor_complex_logo.png)
 
-Look at the definition: Lambda contains a tansforming rule (substitution from a variable) and a syntax for declaring function. The generic usage of Lambda calculation is that any calculating function can be represented and calculated by lambda. Therefore, it is equivalent to the Turing machine
+Look at the definition: Lambda contains a transforming rule (substitution from a variable) and a syntax for declaring function. The generic usage of Lambda calculation is that any calculating function can be represented and calculated by lambda. Therefore, it is equivalent to the Turing machine
 
 Lambda is a mapping relationship between `x` to `y`. It is equivalent to the anonymous function in most of Functional Programming Languages. The reason of being named as lambda expression is that these functions are always used once or few times, which do not need function name.
 
@@ -13,7 +13,7 @@ Lambda is a mapping relationship between `x` to `y`. It is equivalent to the ano
 
 Anonymous function can be passed into another function as a parameter, or returned as a closure.
 
-However, an anonymous function is not a lambda calculus, because an anonymous function may accept multiple parameters, whereas, the lambda calculus accepts only one parameter, like: 
+However, an anonymous function is not necessarily a lambda calculus, because an anonymous function may accept multiple parameters, while, the lambda calculus accepts only one parameter, like:
 
 ```
 multiple(x, y) = x*y
@@ -25,7 +25,7 @@ Simplify to a mapping expression, removing the function name:
 (x,y) -> x*y
 ```
 
-Is this a lambda? Negative. Lambda is not just a simple mapping relationship without function name, but also a mapping from only single parameter. 
+Is this a lambda? Negative. Lambda is not just a simple mapping relationship without function name, but also a mapping from only single parameter.
 
 Precisely speaking, let's look at into the mapping process above:
 
@@ -64,4 +64,4 @@ That is, the anonymous function `(x,y)->x*y` is the combination of two lambdas, 
 
 The way that a function accepting single parameter returns another function that accepts the second single parameter is called Curring. We will talk about Curring more in Chapter 02.
 
-We put Curring aside, and let's look at lambda in JavaScript at first.
+Before we go deeper in Curring, let's look at how to use lambda in JavaScript at first.

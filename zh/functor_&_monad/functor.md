@@ -108,6 +108,9 @@ Functor(Function, {
 
 还记得前面说 fmap 函数像函数组合吗, 呵呵, 我们这里就按函数组合实现.
 
+---
+来总结一下 fmap 和 Functor 到底是什么, fmap 可以将函数应用到 Functor 上, Functor 可以看做是容器或者是带 context 的值. 也就是说如果我们想变换 x 的值, 给一个函数映射 `x=> x*2` 即可. 如果我想变换一个数组, 一个函数, 或者 Either 这种带有 context 的或者说容器里面的值, 就需要 fmap 将这种映射关系应用到里面的值.
+
 好吧, 通过如何实现和使用一个简单的 Functor, 概念上已经估计可以理解了, 我们回过头来看看 Either 是神马玩意.
 
 [完整代码](http://jsbin.com/xezun/1/embed?js,console)

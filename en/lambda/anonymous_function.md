@@ -1,6 +1,8 @@
 # Anonymous Function
 
-Supporting anonymous function means we can place a function as first order member. So that a function can be passed as a parameter, and returned as a value. JavaScript is a functional programming language. It supports first order function and allow us to define an anonymous function easily.
+Supporting anonymous function means we treate function as first class citizen. So you can pass a function as a parameter, or returned as a value. JavaScript is actually a functional programming language. It supports first class function and allow us to define an anonymous function easily.
+
+![](http://southparkstudios.mtvnimages.com/shared/characters/kids/mysterion.jpg)
 
 ### Define Anonymous Function
 
@@ -10,15 +12,15 @@ function(x){
 }// => SyntaxError: function statement requires a name
 ```
 
-Why we get a SyntaxError here? Because we need a function expression to create an anonymous function.
+Why we got a SyntaxError here? Because we need a function expression to create an anonymous function.
 
-A expression returns value:
+Expression should returns a value:
 
 ``` js
 var a = new Array()  // new Array() is an expression, and the whole line is called a statement.
 ```
 
-But why the error says: `function statement requires a name`. In JavaScript, there is another way to declare a function, that is using function statement. A statement requires a name. The code above is treated as function statement, because it returns nothing. Therefore, we got the error.
+But why the error says: `function statement requires a name`. In JavaScript, there is another way to declare a function, that is using function statement. A statement requires a name. The code above is treated as function statement, because there is nothing to return. Therefore, we got the error.
 
 If we assign `function (x){return x*x}` to a variable, or pass it as a parameter, we will not get any SyntaxError, because `function (x){return x*x}` is only a expression under this circumstance. For instance:
 
@@ -52,21 +54,27 @@ console.log(function(x){ return x*x});
 
 The `undefined` is the return value for `console.log()`, and `function()` is the return value from function expression that defines an anonymous function.
 
+Although squareA looks like a named function, but while you construct an Object from it, that will be a bit funny:
+```js
+new squareA().constructor.name // => ""
+new squareB().constructor.name // => "squareB"
+```
+
 ### Use Anonymous Function
 
-Function is treated as first order, that means we can assign a function to a variable:
+Function is first class, that means we can assign a function to a variable:
 
 ```js
 var square = function(x) {return x*x}
 ```
 
-We also pass the anonymous function as a parameter, like before we passed an anonymous function to ` console.log`:
+We can pass the anonymous function as a parameter as well. just like we passed an anonymous function to ` console.log`:
 
 ```js
  console.log(function(x){return x*x})
 ```
 
-And, we return a function as a return value:
+And, we can return a function just like return a value:
 
 ```js
 function multiply(x){
