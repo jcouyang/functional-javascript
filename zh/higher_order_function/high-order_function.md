@@ -40,8 +40,10 @@ var aliasFor = oldName => {
 
 有什么用呢,  由于这里使用了 `fn` 的副作用(side affect) 来干了一些事情`E[newName] = E[oldName]`, 也就是给 E 的方法起一个别名, 因此每次调用 fn 都会给`E` 起一个别名. `aliasFor`最后返回的是 `fn` 自己的一些别名,使得可以 chain 起来更可读一些:
 ```js
-aliasFor('reduce').is('reduceLeft).is(foldl)
+aliasFor('reduce').is('reduceLeft').is('foldl')
 ```
+
+[](http://jsbin.com/qohil/1/watch?js,console)
 
 > **Note** 另外, 函数作为返回值的重要应用, 柯里化与闭包, 将会在在后面专门介绍. 我们先来看下以函数作为参数的高阶函数的典型应用.
 

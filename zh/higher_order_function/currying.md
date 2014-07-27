@@ -130,14 +130,14 @@ willNotCurry(1)
 // => 1 undefined undefined
 ```
 
-如果使用自动柯里化的库 [ramda](https://github.com/CrossEye/ramda), 前面的例子简直就完美了
+如果使用自动柯里化的库 [eweda](https://github.com/CrossEye/eweda), 前面的例子简直就完美了
 ```
-var multiple = ramda.curry(function(a, b){
+var multiple = curry(function(a, b){
   return +b*a + ''
 })
-var plus = ramda.curry(function(a, b){
+var plus = curry(function(a, b){
   return (+b)+a + ''
 })
 ```
 
-[完整代码](http://jsbin.com/hamoq/3/embed?js,console)
+[完整代码](http://jsbin.com/hamoq/4/embed?js,console)

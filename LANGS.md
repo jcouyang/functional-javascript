@@ -1,2 +1,2 @@
-* [English(in progress)](en/)
 * [Chinese](zh/)
+* [English(in progress)](en/)
