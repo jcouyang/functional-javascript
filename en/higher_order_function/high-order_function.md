@@ -17,11 +17,11 @@ If we want to sort the array in descending order, we just pass `(x, y) => y - x`
  {id:4, name:'four'}].sort((x,y) => x.id - y.id)
  ```
 
-Have you feel the flexible of higher-order function and anonymous function combination?
+Have you feel the flexibility when composing higher-order function and anonymous function?
 
 
-###Function as return value
-The return value of a function can not just be a value, but also can be a function. Let's look at the `aliasFor`, an utility function in [Ramda](), which is used to give an alias for certain member in function E.
+###Return function as value
+The return value of a function can not just be a value, but also can be a function. Let's look at the `aliasFor`, an utility function in Eweda, which is used to give an alias for certain member in function E.
 
 > **Note** Does this sound wired? How can a function contain a member? The function in JavaScript, in fact, is a special Object. Try typing `console.log.` in Firefox console, have you noticed some members in Intellisense, however, `typeof console.log` indicates `console.log` is just a function.
 
@@ -35,18 +35,17 @@ var aliasFor = oldName => {
     return (fn.is = fn.are = fn.and = fn);
 };
 ```
-There are two `return`s, the one is that `fn` returns itself, the another is that `aliasFor` also returns `fn` and gives `fn` a few of alias like `fn.is`, `fn.are` ...
+There are two `return`s, the first one is that `fn` returns itself, the another is that `aliasFor` also returns `fn` and gives `fn` a few of alias like `fn.is`, `fn.are` ...
 
-What is the meaning of two returns? Returning `fn` from `fn` simply means `fn() => fn`, so that `fn()() => fn() => fn`, etc. No matter how many time the `fn` is invoked, the final return value is still `fn`.
+What is the meaning of returning `fn` it self? Returning `fn` from `fn` simply means `fn() => fn`, which means `fn()() => fn() => fn`, etc. No matter how many time the `fn` is invoked, the final return value is still `fn`.
 
 ![Imgur](http://i.imgur.com/1qUCC8s.png)
 
-How do we use this? We make `E[newName] = E[oldName]` by using the side affect of `fn`, giving a alias for the specific member of E. So that each invocation of `fn` will give an alias name to `E`. The second `return` assigns some alias names for `fn` itself, so we can wirte more readable chain-code:
+Why we doing this? We can make `E[newName] = E[oldName]` by using the side affect of invoking `fn`. So that each invocation of `fn` will give an alias name to `E`. The second `return` assigns some alias names for `fn` itself, so it became more readable by chaining the function:
 
 ```js
-aliasFor('reduce').is('reduceLeft).is(foldl)
+aliasFor('reduce').is('reduceLeft).and(foldl)
 ```
 
-> **Note** We will explain more on importance of function as a return value, Currying, and closure in later chapters. Let's look at typical application of higher-order function as passing value.
-
+> **Note** We will explain more about how importance of returning function as a value, Currying, and closure in later chapters. Let's look at typical application of passing function to a higher-order function.
 [method]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function "function"

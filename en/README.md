@@ -7,17 +7,17 @@ If you're kind of:
 
 ![](/en/images/i have no idea what im doing.jpg)
 
-Plz read [Learn JavaScript](https://www.gitbook.io/book/gitbookio/javascript) first, but you're just like:
+Plz read [Learn JavaScript](https://www.gitbook.io/book/gitbookio/javascript) first, but if you're just like:
 
 ![](/en/images/function inside function.jpg)
 
-this book may help you understand that at some point.
+this book may help you functional stuff at some point.
 
 I chose [Eweda](https://rawgit.com/CrossEye/eweda/master/docs/eweda.html) as functional library for almost all examples.
 
 > **Comment** Eweda is more academic version of [Ramda](https://rawgit.com/CrossEye/ramda/master/docs/ramda.html)
 
-> **Comment**[Why not Underscore](http://fr.umio.us/why-ramda/) Short story: no auto curry. Long story: checkout chapter 2.
+> **Comment** [Why not Underscore](http://fr.umio.us/why-ramda/) Short story: no auto curry. Long story: checkout chapter 2.
 
 ----
 
