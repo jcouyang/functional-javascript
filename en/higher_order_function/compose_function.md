@@ -1,26 +1,27 @@
-# 函数组合 function composition
+# Function Composition
 
-通过前面的高阶函数,  map, fold 以及柯里化, 其实以及见识到什么是函数组合了. 如 map 就是 由 fold 函数与 reverse 函数组合出来的.
+We have seen the Function Composition in our previous chapters, like higher-order function, `map`, `fold` and Currying. In fact, `map` is composited from `fold` and `reverse`.
 
-这就是函数式的思想, 不断地用已有函数, 来组合出新的函数.
+This is the functional conception, compositing new function from the functions we already have.
 
 ![](http://turner.faculty.swau.edu/mathematics/materialslibrary/images/composition.jpg)
 
-如图, `(g.f)(x)`就是 `f` 与 `g`
-的组合`g(f(x))`, 而前面实现的 map 函数就相当于 `(reverse.fold)(list)`.
+
+As shown in the figure above, `(g.f)(x)` is equivalent to `g(f(x))` composited from `f` and `g`. Similarly, `map` implamented in previous section is equivalent to `(reverse.fold)(list)`.
 
 ### compose
 
-Eweda 提供了非常方便的compose 方法
+Eweda provides us a convenient `compose` function.
+
 ```js
 var gh = E.compose(f, g)
 ```
 
-说到了函数组合, 柯里化, 我想现在终于可以解释清楚为什么在这里选用 Eweda 而不是 Underscore 了.
+We have talked about composition, currying, so right now I can explain clearly why choosing Ewada instead of Underscore.js.
 
-如果我现在想要 tasks 列表中所有属性为` completed`为` true` 的元素, 并按照` id` 排序.
+Supposing I need find out all elements where its `completed` equals `true` in a list, and sort them by `id`.
 
-underscore 里会这样写:
+In underscore, I will write:
 ```js
 _(tasks)
     .chain()
@@ -29,45 +30,49 @@ _(tasks)
 ```
 
 这种方式怎么看都不是函数式, 而是以对象为中心, 或者函数式一些, 组合
+This code doesn't look like functional, it likes object-oriented, 或者函数式一些, 组合
 ```js
 _.sortBy(_.filter(tasks, task => task.completed===true), task => task.id)
 ```
 
-恩恩, 看起来不错嘛, 为什么不用 underscore.
+Well, it looks better now. But why we don't use underscore, and we use Eweda:
 
-而用 Eweda :
 ```js
 E.compose(E.sortBy(task=>task.id), E.filter(task=>task.completed===true))(tasks)
 ```
-好像没什么区别啊? 不就是用了 compose 吗?
 
-区别大了这, 看见` tasks` 是最后当参数传给`E.sort(E.filter(task=>task.completed===true))`的吗? 而不是写死在filter 的参数中. 这意味着在接到需要处理的数据前, 我已经组合好一个新的函数在等待数据, 而不是把数据混杂在中间, 或是保持在一个中间对象中.
+It seems the code doesn't make any difference, it just use `compose`.
 
-好吧如果你还看不出来这样做的好处. 那么来如果我有一个包含几组 tasks的列表 groupedTasks, 我要按类型选出 completed 为 true 并按 id 排序.
+However, the big difference here is, in `E.compose`, `tasks` is the final parameter passed into `E.sort(E.filter(task=>task.completed===true))`, whereas, in `_.sortBy`, `tasks` is a binded parameter of `_.filter`. That means, `E.compose` has already created a new function before accepting the parameter, instead of mixing data (passed as parameter) during composition, or keeping data in a middle object like `_.filter`.
 
-underscore:
+If you haven't seen the benefit of this, let me give you a expamle. Supposing I have a list `groupedTasks` containing a few of `tasks`, I want to find out the elements of `completed === true`, and sort them by `id`.
+
+In underscore, we write:
 ```js
 _.map(groupedTasks, tasks => _.sortBy(_.filter(tasks, task => task.completed===true), task => task.id))
 
 ```
-不知道你看懂了没, 反正我看不懂.
+I am not sure whether you can understand it or not, anyway I can not understand it.
 
-来看看 Eweda
+While in Eweda, we write:
 ```js
 var completedAndSorted = E.compose(E.sortBy(task=>task.id), E.filter(task=>task.completed===true))
 E.map(completedAndSorted)(groupedTasks)
 ```
-看出来思想完全不一样了吧.
 
-由于 Eweda 的函数都是自动柯里化的, 因此可以随意组合, 最终将需要处理的数据扔给组合好的函数. 这是函数式的思想.
+Have you notice that the thought is totally different.
+
+In Eweda, functions are automatic currying, so that they can be composited at will, then create a new function accepting the data that needs to be handled. This is functional conception.
 
 ![](http://www.moebiusnoodles.com/s/wp-content/uploads/2012/09/ThreeFunctionMachines.jpg)
 
-而 underscore 要么是以对象保持中间数据, 用 chaining 的方式对目标应用各种函数, 要么用函数嵌套函数, 将目标一层层传递下去.
+However, in underscore, either we keep intermediate data in Object, applying various functions on target by chaining approach, or we use nested functions passing the target through each level.
 
 -----
-类似 compose, eweda 还有一个方法叫 pipe, pipe 的函数执行方向刚好与 compose 相反. 比如 `pipe(f, g)`, `f`会先执行, 然后结果传给` g`, 是不是让你想起了 bash 的 pipe
+Similar to `compose`, Eweda has a function called `pipe`, which executes function in opposite direction of `compose`. Like `pipe(f, g)`, Eweda executes `f` at first, then passes result to `g`. Does this remind you of `pipe` in bash?
+
 ```
 find / | grep porno
 ```
-没错,他们都是一个意思. 而且这个函数执行的方向更适合人脑编译(可读)一些.
+
+Yes, they are all the same. And this execution direction is more suitable for compiling in the human brain (more readable).
