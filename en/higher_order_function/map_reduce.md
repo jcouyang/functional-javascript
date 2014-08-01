@@ -21,46 +21,24 @@ var foldl = function(fn, acc, list) {
 aliasFor("foldl").is("reduce");
 ```
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-As the code represents, `foldl` accepts three parameters:
 
-* a function `fn` accepting two parameters: `acc` and element of list,
-* an accumulated value `acc`,
-* and the `list` we need apply `fold` on.
-=======
-=======
->>>>>>> scotv-en-version
 Function `foldl` accepts three parameters:
 
 * a function `fn` which accepting two parameters: `acc` and a list,
 * an accumulated value `acc`,
 * finally the `list` we need to apply `fold` on.
-<<<<<<< HEAD
->>>>>>> revise :uk: 2.1 2.2
-=======
->>>>>>> scotv-en-version
 
 This implementation is a simple recursion, because `foldl` invokes itself.
 
 0. The terminal condition of recursion is when `isEmpty(list) === true`, then it returns `acc`,
 0. otherwise, it applies `acc` and the first element of list `head(list)` to `fn`, and passes the result as new `acc` into `foldl`,
 0. then, it passes the remaining list `tail(list)` as new list into `foldl`
-<<<<<<< HEAD
-
 
 And you may probably notice the fact that it's actually a **tail recursion**.
 
 > **Note**Why we use tail recursion?
 
-=======
 
-
-And you may probably notice the fact that it's actually a **tail recursion**.
-
-> **Note**Why we use tail recursion?
-
->>>>>>> scotv-en-version
 0. We will get the result of each calculation for `fn(acc, head(list)`, and pass it to next invocation as parameter
 0. so we can get the final result directly at the end of recursion, without waiting for the stack to pop out.
 
