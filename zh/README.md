@@ -21,4 +21,3 @@
 ----
 
 > **Note** 由于会介绍 ECMAScript 6 的新特性, 书中很多写法都是 ECMAScript 6 标准, 只能在实现这些 feature 的浏览器(如 Firefox, 请目前参照各浏览器的[实现情况](http://kangax.github.io/compat-table/es6/))里运行. 另外, 大多数的例子源码都会在文章里的 jsbin 链接里.
-

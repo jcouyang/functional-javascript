@@ -1,20 +1,20 @@
-# 高阶函数(Higher-order function)
-我们已经见识到了匿名函数和箭头函数的用法, 匿名的一等函数到底有什么用呢? 来看看高阶函数的应用.
+# Higher-order function
+In previous chapter, We have talked about the anonymous function and arrow function. So what can we do with such kind of anonymous first-classs function? Let's check out Higher-order function.
 
-高阶函数意思是它接收另一个函数作为参数. 为什么叫`高阶`: 来看看这个函数 `f(x, y) = x(y)`
-按照 lambda 的简化过程则是
+A higher-order function is function that accepts another function as a parameter. Why we name that "Higher-order" here? Let's look at this function: `f(x, y) = x(y)`, according to the simplifying process of lambda, we have:
 ```
-f(x) => (y -> x(y))
-(y) => x(y)
+var f = x => (y => x(y))
+y => x(y)
 ```
-可以卡出来虽然只是调用 f, 但是返回还有一个函数x要求值.
 
-还记得高等数学里面的导数吗, 两阶以上的导数叫高阶导数. 因为求导一次以后返回的可以求导.
+We can notice that the function `f` need another function `x` as parameter, although `f` is the only function we invoked.
 
-概念是一样的, 如同[俄罗斯套娃](https://en.wikipedia.org/wiki/Matryoshka_doll)当函数执行以后还需执行或者要对参数执行, 因此叫高阶函数.![](http://s3.amazonaws.com/lyah/recursion.png)
+Have you remembered the derivative from Calculus, where we call higher derivative, when we calculate derivation on previous derivation.
 
-高阶函数很多典型的应用如` map`,`reduce`. 他们都是以传入不同的函数来以不同的方式操作数组元素.
+Thay are all share similar conception, like [Matryoshka doll](https://en.wikipedia.org/wiki/Matryoshka_doll). The reason why it is called high-order function is that it's return value can be invoked again or need to invode some parameter passed in. in.![](http://s3.amazonaws.com/lyah/recursion.png)
 
-而柯里化, 则是每次消费一个参数并返回一个逐步被配置好的函数.
+There are many typical usage of higher-order function such as `map` or `reduce`. They accept different functions to manipulate each element in array in different ways.
 
-高阶函数的这些应用都是为函数的组合提供灵活性. 在本章结束相信你会很好的体会到函数组合的强大之处.
+While, Currying is the technique of returning a partial configured function each time it consume a argument.
+
+All features of higher-order function bring us the flexibility to compose functions. You will feel what a powerful technique compose function is by the end of this chapter.
