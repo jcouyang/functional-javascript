@@ -2,9 +2,15 @@
 ### Functor
 Functor 是 可以被 map over 的类型. 什么叫 map over...
 
+`Functor` is a type that can be mapped over. What is the map over?
+
+For instance, the `list` can be considered as a type that can be mapped over. So is mapped over type a enumerable type?
+
 比如 list 就可以说是可以被map over... 那么是不是可枚举类型?
 
 不是的, 来看看 Haskell 中如何解释(其实所有函数式的概念可能用 haskell 是最能说明问题的了).
+
+The anwser is no, let's look at the explanation in Haskell. (In fact, all concepts in functional programming can be interpreted under Haskell more clearly.)
 
 ```haskell
 ghci > :t fmap
@@ -107,6 +113,9 @@ Functor(Function, {
 ```
 
 还记得前面说 fmap 函数像函数组合吗, 呵呵, 我们这里就按函数组合实现.
+
+---
+来总结一下 fmap 和 Functor 到底是什么, fmap 可以将函数应用到 Functor 上, Functor 可以看做是容器或者是带 context 的值. 也就是说如果我们想变换 x 的值, 给一个函数映射 `x=> x*2` 即可. 如果我想变换一个数组, 一个函数, 或者 Either 这种带有 context 的或者说容器里面的值, 就需要 fmap 将这种映射关系应用到里面的值.
 
 好吧, 通过如何实现和使用一个简单的 Functor, 概念上已经估计可以理解了, 我们回过头来看看 Either 是神马玩意.
 

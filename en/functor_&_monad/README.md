@@ -1,5 +1,5 @@
 # Functor & Monad
 
-本章要介绍两个神秘的概念, 如果你没接触过 Haskell 或者 scala, 这有可能是你从没见过的神秘概念.
+This chapter will introduce two mysterious concepts. If you didn't touch Haskell or Scala before, these concepts may be the mysterious things you have never seen.
 
-我会通过把这两个概念带入到 JavaScript 并且实现, 来解释为什么我们需要 Functor & Monad. 他们能给我们的编程带来哪些好处.
+I will explain the reason of our needing of Functor and Monad and the usage for our programming, by introducing these two concepts and implementing them.
