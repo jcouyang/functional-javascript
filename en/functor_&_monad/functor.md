@@ -19,9 +19,15 @@ fmap :: (a -> b) -> fa -> f b
 
 `fmap` 又是什么东西, fmap 是 map over Functor 的函数. 这个函数只干一个事情, 可能通过前面解释的一点点 Haskell功夫,你可能能翻译`(a -> b) -> fa -> f b`了把. 给定一个从`a` 到` b` 的映射函数, 再给定一个 a 的 Functor, 返回一个 b 的 Functor.
 
+What is the `fmap`, `fmap` is a function that can map over Functor. This function only handle one thing: `(a -> b) -> f a -> f b` (you may interpret this after we have talked about Haskell before), that is given a mapping function from `a` to `b`, and a Functor `f a`, we can get a Functor `f b`.
+
 虽然个个字都认识, 但怎么就不知道啥意思.
 
+The definition is easy to read, but is difficult to understand. 
+
 如果我再说一个新词, 你是不是会疯掉了-- Lift.
+
+Now, if I use another new word "Lift", will I make you crazy?
 
 好吧, 把他们都串起来, 你就明白了.
 All right, If you connect them all together, you will understand:
