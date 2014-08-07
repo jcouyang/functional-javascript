@@ -14,7 +14,7 @@
 
 那么这本书将会对你会有所帮助.
 
-我选用的 JavaScript 函数式库是 [Eweda](https://rawgit.com/CrossEye/eweda/master/docs/eweda.html)([Ramda](https://rawgit.com/CrossEye/ramda/master/docs/ramda.html)的更函数式的实现,  Eweda 更函数式, 但是 Ramda 要更 pratical 一些)
+我选用的 JavaScript 函数式库是 [Eweda](https://rawgit.com/CrossEye/eweda/master/docs/eweda.html)([Ramda](https://ramdajs.com)的最初实现，更遵守函数式教条，但由于 javascript 的栈很容易爆，Ramda的实现要更 pratical 一些而且可以用的产品代码中， 千万不要在产品中用 eweda,这里只用eweda做介绍目的)
 
 > **Comment**[为什么不用 Underscore](http://fr.umio.us/why-ramda/) Short version: 用 underscore 体会不到函数式的精髓。Long version: 请移步第二章
 
