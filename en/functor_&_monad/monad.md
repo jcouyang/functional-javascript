@@ -250,3 +250,4 @@ Promise.all([0,0])
 // => "dead when land 10 became 12,3"
 ```
 
+Here, it becomes clear that Promise is a Monad, and we have been using the mystery Monad for a while. Then we turn back to think the Promise, now, it is not abstract and mystery.
