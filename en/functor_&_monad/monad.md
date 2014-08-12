@@ -177,3 +177,76 @@ To summerize the differences of using Monad or not:
 The Advantage seems to get obvious: that is Monad keeps context of value, we can manipulate this value in certain operation, without worry about context
 
 > There is another Monad named `Maybe`. In fact, it's better to use `Maybe` in Pierre's example, because `Maybe` has two status, the one a `Just` containing value, the other is `Nothing` with nothing. You can try it on yourself.
+
+### Using Monad in JavaScript
+Do you know there is a new type called [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Browser_compatibility) in EcmaScript 6? If you don't, you probably heard the `$.ajax` in jQuery. However, If you haven't seen `promise`, you might not read the return value of it.
+
+```js
+var aPromise = $.ajax({
+    url: "https://api.github.com/users/jcouyang/gists"
+    dataType: 'jsonp'
+    })
+aPromise /***
+=> Object { state: .Deferred/r.state(),
+    always: .Deferred/r.always(),
+    then: .Deferred/r.then(),
+    promise: .Deferred/r.promise(),
+    pipe: .Deferred/r.then(),
+    done: b.Callbacks/p.add(),
+    fail: b.Callbacks/p.add(),
+    progress: b.Callbacks/p.add() }
+***/
+```
+
+We can notice there are many  types called `Deferred`, let's try to use it.
+
+```js
+anotherPromise = aPromise.then(_ => _.data.forEach(y=> console.log(y.description)))
+/* =>
+Object { state: .Deferred/r.state(),
+    always: .Deferred/r.always(),
+    then: .Deferred/r.then(),
+    promise: .Deferred/r.promise(),
+    pipe: .Deferred/r.then(),
+    done: b.Callbacks/p.add(),
+    fail: b.Callbacks/p.add(),
+    progress: b.Callbacks/p.add() }
+
+"connect cisco anyconnect in terminal"
+"为什么要柯里化（curry）"
+"批量获取人人影视下载链接"
+......
+*/
+```
+See? it returns another same Object, and the `then` accepts a function manipulating each element of Object. this Object is `Promise`. But why we consider it as Monad? Let's rewrite `Walk the line`:
+
+> We use Promise in ES6, not jQuery Deferred. So do write code in Firefox. And ewada can be installed by:
+> 
+	```
+	var ewd = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	            ewd.src = 'https://rawgit.com/CrossEye/eweda/master/eweda.js';
+	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ewd);
+	eweda.installTo(this);
+	```
+
+```js
+var land = eweda.curry(function(lr, n, pole){
+    pole[lr] = pole[lr] + n;
+    if(Math.abs(pole[0]-pole[1]) > 3) {
+      return new Promise((resovle,reject)=>reject("dead when land " + n + " became " + pole));
+    }
+    return new Promise((resolve,reject)=>resolve(pole));
+});
+
+var landLeft = land(0)
+var landRight = land(1);
+
+Promise.all([0,0])
+.then(landLeft(2), _=>_)
+.then(landRight(3), _=>_) // => Array [ 2, 3 ]
+.then(landLeft(10), _=>_)
+.then(landRight(10), _=>_)
+.then(_=>console.log(_),_=>console.log(_))
+// => "dead when land 10 became 12,3"
+```
+
