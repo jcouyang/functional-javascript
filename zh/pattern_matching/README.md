@@ -52,4 +52,8 @@ var {name:a, greet:{cn:b}} = hello('world');
 
 是不是觉得模式匹配非常有用了.
 
-> **comment** 在 haskell 中函数也可以用模式匹配, 但是 javascript 没有类型系统, 因此不好实现. 比如`hello`在 Haskell 中的类型是 `hello::(String a, HashTable b) -> a -> b`, 而在 javascript 定义的 hello 你可以往里传任何东西, 完全不检查类型.
+> **comment** 在 haskell 中函数也可以用模式匹配, 但是 javascript 没有类型系统, 因此不好实现. 比如`hello`在 Haskell 中的类型是 `hello::(String a, HashTable b) => a -> b`, 而跟`hello::(String a) => a -> a` 是两个函数，因此可以根据参数类型匹配不同的函数。而在 javascript 定义的 hello 你可以往里传任何东西, 而且定义的同名函数会直接覆盖掉前一个，因此原生并不支持这样的匹配模式.
+
+但是依然可以实现的，如果你对模式匹配特别有兴趣， [livescript](http://livescript.net)，或者一个小巧的库[pun](https://github.com/CRogers/pun) 就你能让你满足。
+
+[livescript fibonacci](http://jsbin.com/budiga/1/edit?js)
