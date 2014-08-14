@@ -113,4 +113,4 @@ pipe(
 )(data)
 ```
 
-[完整代码](http://jsbin.com/hivaje/1/watch?js)
+[完整代码](http://jsbin.com/hivaje/1/edit?js)
