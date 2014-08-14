@@ -78,3 +78,5 @@ Multipler.prototype.multiple = function(numbers){
 console.log(new Multipler(2).multiple([1,2,3,4])) // => [ 2, 4, 6, 8 ]
 ```
 Woohoo, we don't need  `var self = this` any more.  `this` in arrow function may automatically capture `this` of outer function, in this case, `Multipler`.
+
+[code](http://jsbin.com/vawobe/2/edit?js)

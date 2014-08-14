@@ -15,7 +15,7 @@ this book may help you functional stuff at some point.
 
 I chose [Eweda](https://rawgit.com/CrossEye/eweda/master/docs/eweda.html) as functional library for almost all examples.
 
-> **Comment** Eweda is more academic version of [Ramda](https://rawgit.com/CrossEye/ramda/master/docs/ramda.html)
+> **Comment** Eweda is stick with more pure academic ideas but unpractical due to Javascript's poor handling of recursion. Here I just use it for example and show the functional idea, but if you want to use such api in production, please use [Ramda](https://rawgit.com/CrossEye/ramda/master/docs/ramda.html).
 
 > **Comment** [Why not Underscore](http://fr.umio.us/why-ramda/) Short story: no auto curry. Long story: checkout chapter 2.
 

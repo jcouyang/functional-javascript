@@ -86,3 +86,5 @@ find / | grep porno
 It's actually `pipe(find, grep(porno))(/)` isn't it.
 
 Yes, they are all the same. And this execution direction is more readable for human brain compiler.
+
+[source code](http://jsbin.com/hivaje/1/edit?js)

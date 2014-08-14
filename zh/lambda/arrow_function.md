@@ -66,5 +66,4 @@ console.log(new Multipler(2).multiple([1,2,3,4]));// => [ 2, 4, 6, 8 ]
 ```
 不需要 `var self = this` 了是不是很开心☺️现在, arrow function 里面的 this 会自动 capture 外层函数的`this` 值.
 
-[完整代码](http://jcouyang.gitbooks.io/functional-javascript/)
-
+[完整代码](http://jsbin.com/vawobe/2/edit?js)
