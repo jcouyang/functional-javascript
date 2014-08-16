@@ -1,11 +1,11 @@
 # Monad
 
-It seems hard to explain the `Monad`, however, you can interpret `Monad` as a `Lazy` or a box with inside status unknown. This hears like [Schrödinger's cat](http://en.wikipedia.org/wiki/Schr%C3%B6dinger%27s_cat) (but you may get more confused after you clicked into this wiki post). Anyway, "Schrödinger's cat" indicates that you have no idea about the status of the cat inside, before you open the box.
-.
+It seems hard to explain the `Monad`, however, you can interpret `Monad` as a `Lazy` or a box with unknown value/status inside. This sounds like [Schrödinger's cat](http://en.wikipedia.org/wiki/Schr%C3%B6dinger%27s_cat) (you may get more confused after you clicked into this wiki post). Anyway, "Schrödinger's cat" indicates that you have no idea about the status of the cat inside, before you open the box.
 
-So, what is the mystery in the black box of Monad? Let's open and taste.
 
-Have we make an agreement for explaining the `Either`? Yes, we are on the right track. Last chapter we said Either is a Functor that can be `fmap over`. Why here we metioned black box (Monad). In fact, Monad is also a Functor.
+So, what is the mystery in the black box of Monad? Let's open and taste it.
+
+I said I will explain `Either`, here it is. And we've refer Either is a Functor that can be `fmap over`. But here we metioned it as black box (Monad). In fact, Monad is subset of Functor, which means any Monad is a Functor as well.
 
 
 ### Either
@@ -17,13 +17,13 @@ either
 (a -> c) -> (b -> c) -> Either a b -> c
 ```
 
-You may be familiar with arrow notation `->`. But if you have missed previous chapters, I will give you a brief translation. Here it accepts two functions (`a->c` and `b->c`) and an `Either`, if the value of `Either` is on the leftside, it uses function mapping `a-c`, if on the rightside, applying second function mapping `b->c` 
+You may be familiar with arrow notation `->`. But if you have missed some previous chapters, I can give you a brief translation. Here it accepts two functions (`a->c` and `b->c`) and an `Either`, if the value of `Either` is on the leftside, it uses function mapping `a->c`, if on the rightside, applying second function mapping `b->c` 
 
-Being a Monad, it should have a method `>>=`, i.e. `Bind` method. (You maybe familiar with this symbol, if you look at the logo of Heskell, you can understand how importance Monad is).
+a Monad must have a method `>>=`, a.k.a. `Bind` method. (ah, I may have seen this symbol somewhere before, indeed, yes, if you look at the logo of Heskell, you'll understand how importance Monad is).
 
 ![](http://www.haskell.org/wikistatic/haskellwiki_logo.png)
 
-The meaning of Bind is simple, that is adding a operation on the box. Putting radioactive atom into box, if cat is alive, it is a Hulk-cat, otherwise, it is a Hulk-dead-cat.
+The meaning of Bind is simple, which is adding a operation on the box. It's like the operation of putting radioactive atom into box, if cat is alive, it is a Hulk-cat, otherwise, it is a Hulk-dead-cat.
 
 
 ```js
@@ -44,7 +44,7 @@ Pierre has decided to take a break from his job at the fish farm and try tightro
 Let's say that he keeps his balance if the number of birds on the left side of the pole and on the right side of the pole is within three. 
 
 #### General Sulotion
-Let's look at the sulotion without Moand, 
+Let's try solve this without Moand, 
 ```js
 eweda.installTo(this);
 var landLeft = eweda.curry(function(n, pole){
@@ -58,7 +58,7 @@ console.log(result);
 // => [3, 1]
 ```
 
-And we need a operation to determine whether Pierre falls or not.
+And we need to determine whether Pierre falls or not.
 
 ```js
 var landLeft = eweda.curry(function(n, pole){
@@ -106,7 +106,7 @@ var dead = function(x){
 either(dead, stillAlive, landLeft(2, [0,0]))
 ```
 
-All right, we are getting closer. But now there is only time bird's landing, how can we represent multiple times? The answer is we need implement >>=, bind method of Either. If you remember our implementation of Functor, it looks similiar:
+All right, we are getting closer. But now there is only one bird landing, how can we represent multiple times? The answer is we need implement >>=, bind method of Either. If you remember our implementation of Functor, it looks similiar:
 
 ```js
 var Monad = function(type, defs) {
@@ -172,14 +172,14 @@ To summerize the differences of using Monad or not:
 0. Monds doesn't handle the Exception, instead, it adds new operations into box. You can see the Exception handling has been brought in the end of `either` value.
 0. Monds passes box, while the general sulotion passes Exception like `dead`, that leads each later operation has to check the Exception.
 
-> **comment** Because we use JaveScript, pole accepts any type, so that we use a string to represent the error state of `pole`. But if we turn into strong-typed Java, it maybe hard to implement.
+> **comment** Because we use JaveScript, pole accepts any type, so that we use a string to represent the error state of `pole`. But if we turn into strong-typed language Java, it maybe hard to implement.
 
 The Advantage seems to get obvious: that is Monad keeps context of value, we can manipulate this value in certain operation, without worry about context
 
 > There is another Monad named `Maybe`. In fact, it's better to use `Maybe` in Pierre's example, because `Maybe` has two status, the one a `Just` containing value, the other is `Nothing` with nothing. You can try it on yourself.
 
 ### Using Monad in JavaScript
-Do you know there is a new type called [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Browser_compatibility) in EcmaScript 6? If you don't, you probably heard the `$.ajax` in jQuery. However, If you haven't seen `promise`, you might not read the return value of it.
+Do you know there is a new type called [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise#Browser_compatibility) in EcmaScript 6? If you don't, you probably heard the `$.ajax` in jQuery. However, If you haven't seen `promise`, you might not read the return value of ajax call.
 
 ```js
 var aPromise = $.ajax({
@@ -198,7 +198,7 @@ aPromise /***
 ***/
 ```
 
-We can notice there are many  types called `Deferred`, let's try to use it.
+We can notice many of these are belong to type `Deferred`, let's try to use it.
 
 ```js
 anotherPromise = aPromise.then(_ => _.data.forEach(y=> console.log(y.description)))
@@ -250,4 +250,4 @@ Promise.all([0,0])
 // => "dead when land 10 became 12,3"
 ```
 
-Here, it becomes clear that Promise is a Monad, and we have been using the mystery Monad for a while. Then we turn back to think the Promise, now, it is not abstract and mystery.
+Here, it becomes clear that Promise is a Monad, and we have been using the mystery Monad already without notice. But when we're using Promise, it actually is not that abstract and mystery.
