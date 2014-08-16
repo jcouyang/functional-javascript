@@ -9,65 +9,65 @@ The anwser is no, let's look at the explanation in Haskell. (In fact, all concep
 
 ```haskell
 ghci > :t fmap
-fmap :: (a -> b) -> fa -> f b
+fmap :: (a -> b) -> f a -> f b
 ```
 
 What is the `fmap`, `fmap` is a function that can map over Functor. This function only handle one thing: `(a -> b) -> f a -> f b` (you may interpret this after we have talked about Haskell before), that is given a mapping function from `a` to `b`, and a Functor `f a`, we can get a Functor `f b`.
 
 The definition is easy to read, but is difficult to understand. 
 
-Now, if I use another new word "Lift", will I make you crazy?
+What if I introduce another new word -- "Lift", more confuse eh?
 
-All right, If you connect them all together, you will understand:
+All right, If you combine all of these concepts together, you will understand:
 
-0. Usaually, we name the mapping relationship from `a` to `b` as the `map`, using the function as the mapping approach.
-0. Similiarly, we name the function or other typies, calculations that can be applied `map` as `Functor`.
-0. Such map is a fmap, that is given a mapping (ie. a function) from set A to set B, there is a transformation of a computation on A, the transformation is a computaion on B.
-0. If the computation is a function, then this operation is called lifting. Vividly, it lefts the mapping from A to B to another level.
+0. Usually, we name the mapping relationship from `a` to `b` as the `map`, using the function as the mapping approach.
+0. Similarly, we name function or other type, calculation that can be applied `map` as `Functor`.
+0. Such map is a fmap, given a mapping (ie. a function) from set A to set B, there should be a transformation from a computation on A,to a computation on B.
+0. If the computation is a function, then this operation is called lifting. Imagine that it lefts the mapping from A to B to their function.
 
 ![](http://learnyouahaskell-zh-tw.csie.org/img/lifter.png)
 
-Despite the word "lifting" is vivid, the explanation becomes more and more abstract. Let me give you a example.
+If this image didn't explain all, let me give you a example.
 
 ### Example
-> **note** Attention, because we have not implemented `Functor`, the code below can not work in your console.
+> **note** Attention, because we haven't implemented `Functor` yet, the code below may not work in your console.
 
-We mentioned an array is a Functor, because the array can be mapped over.
+As I said a array is Functor, because the array can be mapped over.
 ```js
 var plus1 = n => n+1;
 fmap(plus1, [2, 4, 6, 8])// => [3,5,7,9]
 ```
 
-Here, array is a Functor type, and the `fmap` transform array [2,4,6,8] by a mapping method 2 -> 3, then it returns [3,5,7.9]. It is easy to understand because the fmap is similiar to `array.map`.
+Here, array is a Functor type, and the `fmap` transform array [2,4,6,8] by a mapping method 2 -> 3, then it returns [3,5,7.9]. It is easy to understand because the fmap is similar to `array.map`.
 
-Let's try another Functor type, take the function as a example:
+Let's try another Functor type, let's say a Function:
 ```js
 var times2 = m => m*2;
 fmap(plus1, times2) // => function(){}
 fmap(plus1, times2)(3) // => 7 (3*2+1)
 ```
 
-You may notice the return value of fmap is a function, because the parameter you want to map over is a function `times2`. Remember the equation `(a -> b) -> fa -> f b`, and here the Functor is a function type that can be written as `x->`, so we replace the original equation by `x->`:
+You may notice the return value of fmap is a function, because the parameter you want to map over is a function `times2`. Remember the equation `(a -> b) -> f a -> f b`, here we can simply substitute what we got here in, `f` is a Function, so we replace `f` by `x->`:
 
 ```
 (a -> b) -> (x -> a) -> (x -> b)
 ```
 
-Then we replace equation above by specific function `plus1`:
+which in this case `x->` is `plus1`, `a->b` is `n->n*2`, so we got:
 ```
-(n->n+1) -> (x->n) -> (x -> n+1)
+(n->n*2) -> plus1(n) -> plus1(n*2)
 ```
 
-That means, if `times2` accepts x and returns n, then the function liftted by `fmap` returns n+1.
+That means, we map function plus1 over whatever function (n->n*2) return.
 
 Is this a composited function `plus1(times2(3))`? Yes, but function composition is only the tip of an iceberg of Functor, let's look at another Functor.
 
-Functor can be something else, like:
+Functor can be something else, such as Object:
 ```
 fmap(plus1, Either(10, 20))
 ```
 
-`Either` is also a Functor. Wait for a minute, what type the Either is? All right, before we explain the Either, let's hold on and try to implement and use a Functor in JavaScript.
+`Either` is also a Functor. Wait for a minute, what type the Either is? All right, before we explain the Either, let's hold on and try to implement Functor in JavaScript first.
 
 ### Functor in JavaScript
 Firstly, we define a function of Functor type, if 
@@ -122,7 +122,7 @@ Functor(Function, {
 Do you remember we metioned that fmap is similiar to function composition? Right, here we implement fmap as function composition.
 
 ---
-To summerize what `fmap` and Functor are: `fmap` applies function on Functor, and the Functor can be considered as a container or context with a value. If we want to change the value of x, we use a function mapping `x=>x*2`. If we want to transform an array ,a function, or `Either` that takes context containing value, then we need `fmap` to apply mapping into each value of them.
+To wrap up what `fmap` and Functor really are: `fmap` applies function on Functor, and the Functor can be considered as a container or context with a value. If we want to change the value of x, we use a function mapping `x=>x*2`. If we want to transform an array ,a function, or `Either` that takes context containing value, then we need `fmap` to apply mapping into the value inside them, but still return the same type.
 
 Right now, we may understand the concept of Functor after implementing and using a simple Functor. Then we look back to see what the `Either` is.
 

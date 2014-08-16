@@ -42,16 +42,17 @@ var times2 = m => m*2;
 fmap(plus1, times2) // => function(){}
 fmap(plus1, times2)(3) // => 7 (3*2+1)
 ```
-看到 fmap 返回的是一个函数, 因为你 map over 的是一个函数` times2`. 还记得 `(a -> b) -> fa -> f b`的公式么, 因为现在的 Functor 为 Function 类型, 函数类型可以理解为`x->`, 因此我们可以将该公式替换为
+看到 fmap 返回的是一个函数, 因为你 map over 的是一个函数` times2`. 还记得 `(a -> b) -> f a -> f b`的公式么, 因为现在的 Functor 为 Function 类型, 我们可以把`f`替换成函数也就是 x 到 y 的映射, 因此我们可以将该公式替换为
 ```
 (a -> b) -> (x -> a) -> (x -> b)
 ```
 
 再用我们具体的函数 plus1 替换进去
 ```
-(n->n+1) -> (x->n) -> (x -> n+1)
+(n->n*2) -> plus1(n) -> plus1(n*2)
 ```
-也就是说, times2 吃 x 返回任何 n的话, 该 fmap lift 出来的函数会返回 n+1.
+
+也就是说, 这个 fmap 会把函数 times2 应用到 plus1 的任何结果上.
 
 这不就是函数组合吗 `plus1(times2(3))`, 确实是的. 但这只是 Functor 的冰山一角, dan在来看看别的Functor
 
@@ -109,7 +110,7 @@ Functor(Function, {
 还记得前面说 fmap 函数像函数组合吗, 呵呵, 我们这里就按函数组合实现.
 
 ---
-来总结一下 fmap 和 Functor 到底是什么, fmap 可以将函数应用到 Functor 上, Functor 可以看做是容器或者是带 context 的值. 也就是说如果我们想变换 x 的值, 给一个函数映射 `x=> x*2` 即可. 如果我想变换一个数组, 一个函数, 或者 Either 这种带有 context 的或者说容器里面的值, 就需要 fmap 将这种映射关系应用到里面的值.
+来总结一下 fmap 和 Functor 到底是什么, fmap 可以将函数应用到 Functor 上, Functor 可以看做是容器或者是带 context 的值. 也就是说如果我们想变换 x 的值, 直接给一个函数映射 `x=> x*2` 即可. 如果我想变换一个数组, 一个函数, 或者 Either 这种带有 context 的或者说容器里面的值, 总不能直接把这些容器直接给函数吧，这时就需要 fmap 将函数的映射关系应用到容器里面的值. 其实就是打开，调一下函数，完了再包好。
 
 好吧, 通过如何实现和使用一个简单的 Functor, 概念上已经估计可以理解了, 我们回过头来看看 Either 是神马玩意.
 
