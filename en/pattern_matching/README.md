@@ -59,3 +59,7 @@ Pattern Match is very useful, isn't it?
 
 > **comment** In Haskell, the function still can be applied Pattern Match. While in JavaScript, Pattern Match for function is difficult to implement, because JavaScript doesn't have Type System. For instance, in Haskell, the type of `hello` is 
 `hello::(String a, HashTable b) -> a -> b`, but in JavaScript, `hello` accepts anything, and doesn't check the type of parameter.
+
+but if you really like the pattern matching thing, you probably can use [livescript](http://livescript.net), or tiny lib [pun](https://github.com/CRogers/pun)
+
+[livescript fibonacci](http://jsbin.com/budiga/1/edit?js)
