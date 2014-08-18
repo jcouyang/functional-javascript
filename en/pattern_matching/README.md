@@ -1,22 +1,23 @@
-# 模式匹配(Pattern Matching)
+# Pattern Matching
 ![](http://reasontostand.org/wp-content/uploads/2010/12/matchingshapes_2.jpg)
 
-模式匹配意思是可以规定一种模式, 比如上图中那些坑的形状, 程序会把对应形状的数(积)据(木)放入匹配的坑中.
+Pattern Matching means you can define a pattern, like the holes of building blocks above, and programming language will assign the data (blocks) of corresponding sharp into matching slot.
 
-### destructuring
-如果你用过 python 或 ruby 什么的， 可能会记得可以这样写
+### Destructuring
+If you have ever used python or ruby, you may remember writing in this way:
 ```python
 a, b = (1, 2) # a=>1, b=>2
 ```
-所以 swap(还记得 c 写 swap 是怎么写的吗) 就可以写成
+So that you can write `swap` like this, think about what a painful when writing `swap` in C:      
 ```python
 b, a = (a, b) # a=>2, b=>1
 ```
 
-这就是 destructuring patterns, 这跟模式匹配有毛关系啊. 这里等号左边就是pattern (模式), 模式匹配就是吧右边的玩意按左边的模式匹配过来.
+This is Destructuring Patterns, what is the relationship with Pattern Match? The answer is left side of the equation is a Pattern, the Pattern Match matches right side according the pattern in left side. So you can think about `=` is doing the pattern matching here.
 
-目前[ES6](http://kangax.github.io/compat-table/es6/#Destructuring) 已经支持了 destructuring, 而且还可 destructure 对象
-> **note** 记得还是用firefox
+[ES6](http://kangax.github.io/compat-table/es6/#Destructuring) has been supporting Destructuring, and has ability to destruct Object.
+
+> **note** All codes should be tested in Firefox.
 
 ```js
 function hello(name){
@@ -33,23 +34,28 @@ var {name:a, greet:{cn:b}} = hello('world');
 // b => 你好
 ```
 
-###list compreshensions
-还是 python, 你可能会见过生成一个原数组两倍的数组.
+###List Compreshensions
+
+Still in python, you may have seen the code that generates a new array doubling each element:
+
 ```python
 [x*2 for x in range(5)] # => [0,2,4,6,8]
 ```
 
-恭喜你, 同样的在 es6中你也可以这么写了
+Congratulations, you can also write in ES6 like this.
+
 ```js
 [x*2 for (x of [0,1,2,3,4])]
 ```
 
-让我们配合下前面的模式匹配来干这么个事情, 有一个 hello 对象数组, 我们要把里面的 greet 中文拿出来，连上一个名字, 再组成数组.
+Cool, isn't it. Let's write a piece of codes using previous Pattern Match. Suppose we have an array of `hello` object, we want to pick up the Chinese greeting, and append a name, then compose a new array.
+
 ```js
 [cn+name for ({name, greet:{cn}} of [hello('Li Lei'), hello('Han MeiMei')])]
 // => ['你好Li Lei', '你好Han MeiMei']
 ```
 
-是不是觉得模式匹配非常有用了.
+Pattern Match is very useful, isn't it?
 
-> **comment** 在 haskell 中函数也可以用模式匹配, 但是 javascript 没有类型系统, 因此不好实现. 比如`hello`在 Haskell 中的类型是 `hello::(String a, HashTable b) -> a -> b`, 而在 javascript 定义的 hello 你可以往里传任何东西, 完全不检查类型.
+> **comment** In Haskell, the function still can be applied Pattern Match. While in JavaScript, Pattern Match for function is difficult to implement, because JavaScript doesn't have Type System. For instance, in Haskell, the type of `hello` is 
+`hello::(String a, HashTable b) -> a -> b`, but in JavaScript, `hello` accepts anything, and doesn't check the type of parameter.
