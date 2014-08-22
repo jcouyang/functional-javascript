@@ -20,8 +20,11 @@
             "token": "04b882f603277dd5498776d62145ad92"
         },
         "ga": {
-            "token": "UA-32314154-1"
-        }
+            "url": "jsbin.com\/.*"
+        },
+				"jsbin": {
+						
+				}
     },
     "links": {
         "home": "http://jcouyang.gitbooks.io",
