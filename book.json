@@ -8,11 +8,6 @@
         "ga"
     ],
     "pluginsConfig": {
-        "fontSettings": {
-            "theme": "white",
-            "family": "serif",
-            "size": 4
-        },
         "richquotes": {
             "todos": true
         },
