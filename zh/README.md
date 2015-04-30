@@ -1,4 +1,7 @@
 # Functional JavaScript
+
+> 本书的更新已牵至 https://blog.oyanglul.us/javascript/functional-javascript.html 
+
 [![Build Status](https://www.gitbook.io/button/status/book/jcouyang/functional-javascript)](https://www.gitbook.io/book/jcouyang/functional-javascript/activity)
 
 这是一本你可能2小时就能看完的小书，但是涵盖了基本所有函数式编程的内容，还包含了一些 ECMAScript 6 定义的函数式新特性, 如箭头函数, 模式匹配等等. 还会介绍函数式一些重要概念在 JavaScript是如何实现即应用, 以及如何以函数式的思想编写 JavaScript 代码.
