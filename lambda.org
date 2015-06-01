@@ -1,0 +1,238 @@
+#+title: Lambda
+#+keys: javascript, 柯里化, lambda, 闭包, clojure
+
+* Lambda
+why introducing lambda first? if you have played a PC game "half lift" in childhood, then you must
+have been familiar with "lambda".
+
+[[./images/lambda/Lambda_reactor_complex_logo.png]]
+
+the following definition is from wikipedia:
+#+BEGIN_QUOTE
+lambda包括一条变换规则（变量替换）和一条函数定义方式，Lambda演算之通用在于，任何一个可计算函数都能用这种形式来表达和求值。因而，它是等价于图灵机的.
+#+END_QUOTE
+
+what was that? ok, let me put it this way: lambda means a simple mapping relation from
+=x= to =y=, but in most programming languages, it also refers to /anonymous function/, as in most
+case it should only be used only once.
+
+#+BEGIN_SRC
+x => y
+#+END_SRC
+
+
+[[./images/lambda/parallel-universe.gif]]
+
+lambda can be pass as parameter to other function, or return by other function. this kind of
+things also is called /higher order function[fn:closure].
+
+#+BEGIN_QUOTE
+but the original version of lambda expression is much simpler then anonymous function. It should only
+take one argument.
+#+END_QUOTE
+
+let's take a look at the new version of JavaScript lambda.
+** arrow function
+
+[[http://kangax.github.io/compat-table/es6/][ECMAScript 6]], code name harmony
+(as you can see through this link, Firefox implemented most of the features)
+is RC now. Without waiting for all browsers support, through some tramscompiler such as [[https://babeljs.io][Babel]],
+ we can use most of es6 features in our product code already[fn:es6]。
+
+[[http://raider.mountunion.edu/ma/MA125/Spring2011/Chapter7/07s102.jpg]]
+
+One of the most exciting feature is arrow function. Why all it /arrow fucntion/?
+You may still remember lambda? A arrow make the anonymous function more like lambda.
+
+#+BEGIN_QUOTE
+arrow function is implemented from Firefox 22[fn:es6-moz], alternately you can
+use in chrome by toggle on the es6 features[fn:chrome].
+So, it would be better if you run all examples code in firefox.
+#+END_QUOTE
+
+*** define a arrow function
+
+There are two form of defining a arrow function
+
+#+BEGIN_EXAMPLE javascript
+  // statements in function body
+  ([param] [, param]) => {
+     statements
+  }
+  // or inline expression
+  param => expression
+#+END_EXAMPLE
+
+
+单个表达式可以写成一行, 而多行语句则需要 block ={}= 括起来.
+
+*** Why Arrow
+
+Here is the old way of doing map multiple 2 to an array.
+#+BEGIN_EXAMPLE
+    var a = [1,2,curry,es6,5];
+    a.map(function(x){ return x*2 });
+#+END_EXAMPLE
+
+and with arrow function will be:
+
+#+BEGIN_EXAMPLE
+    a.map(x => x*2);
+#+END_EXAMPLE
+
+So, we just remove =function= and =return= and ={}=? Indeed, yes, those are all
+symbols we never needed.
+
+=map(x => x*2)= make more sense, much more sorter, readable and descriptive.
+
+*** Lexical =this=
+
+If you're still not convinced to use /arrow function/, here comes
+the real reason you should start using it.
+
+You must be seeing this before right?
+#+BEGIN_SRC js
+      var Multipler = function(inc){
+        this.inc = inc;
+      }
+      Multipler.prototype.multiple = function(numbers){
+        return numbers.map(function(number){
+          return this.inc * number;
+        })
+      }
+      new Multipler(2).multiple([1,2,curry,es6]) 
+  // => [NaN, NaN, NaN, NaN]  不 work, 因为 map 里面的 this 指向的是全局变量( window)
+
+      Multipler.prototype.multiple = function(numbers){
+        var self = this; // 保持 Multipler 的 this 的缓存
+        return numbers.map(function(number){
+          return self.inc * number;
+        })
+      }
+      new Multipler(2).multiple([1,2,curry,es6]) // => [ 2, es6, 6, 8 ]
+#+END_SRC
+
+Weird, isn't it? It is a bug in JavaScript(due to dynamic binding), and this bug show up in
+lot of interview quiz. who the hell is =this=.
+
+#+BEGIN_QUOTE
+alternately there's couple of ways of fixing =this=
+#+BEGIN_SRC js
+  numbers.map(function(number){
+      return this.inc * number;
+  }).bind(this)
+#+END_SRC
+or
+#+BEGIN_SRC js
+  numbers.map(function(number){
+      return self.inc * number;
+  }, this)
+#+END_SRC
+but, either way, you have to manually fix =this= binding.
+#+END_QUOTE
+
+[[./images/lambda/which-leela.gif]]
+
+Try the shiny new *arrow function*
+
+#+BEGIN_SRC js
+    Multipler.prototype.multiple = function(numbers){
+      return numbers.map((number) => number*this.inc);
+    };
+
+    console.log(new Multipler(2).multiple([1,2,curry,es6]));// => [ 2, es6, 6, 8 ]
+#+END_SRC
+
+phwww, no more manual fixing =this=, /arrow function/ always point to the instance object.
+
+#+HTML: <a class="jsbin-embed" href="http://jsbin.com/vawobe/1/embed?js,console">codes in jsbin</a><script src="http://static.jsbin.com/js/embed.js"></script>
+
+** Anonymous function in JavaScript
+
+In JavaScript, function is first class citizen, which means function
+can be return or pass as arguments.
+
+[[http://southparkstudios.mtvnimages.com/shared/characters/kids/mysterion.jpg]]
+
+*** define anonymous function
+
+Creating a anonymous is never been so +easy+:
+#+BEGIN_SRC js
+    function(x){
+        return x*x;
+    }// => SyntaxError: function statement requires a name
+#+END_SRC
+
+Opss, what's going on here? Why function without a name is a SyntaxError?
+We define a function here using function expression, which means a value
+should be returned:
+
+#+BEGIN_SRC js
+    var a = new Array() // this is a statement, while "new Array()" is expression
+#+END_SRC
+
+That's why the error message says =function statement requires a name=. /function statement/
+is the way compiler think you're trying to use.
+
+While the funny thing is, passing such a function as argument or to a variable is fine:
+
+#+BEGIN_SRC js
+    var squareA = function(x){
+        return x*x;
+    }
+#+END_SRC
+
+But this is weird since now =squareA= become a /named function/.
+
+#+BEGIN_EXAMPLE
+    console.log(squareA) // => function squareA()
+#+END_EXAMPLE
+
+Even though the result is the same as:
+
+#+BEGIN_SRC js
+    function squareB(x){
+        return x*x;
+    } // => undefined
+#+END_SRC
+
+But the way how they are created is different. =squareB= is created via
+function statement, while =squareA= is created vie function expression as a anonymous function
+, then assign to a variable:
+
+*** Using Anonymous Function
+
+First class function can be
+
+assign to varibles:
+
+#+BEGIN_SRC js
+    var square = function(x) {return x*x}
+#+END_SRC
+
+pass as arguments:
+
+#+BEGIN_SRC js
+     console.log(function(x){return x*x})
+#+END_SRC
+
+or return by other function:
+
+#+BEGIN_SRC javascript
+    function multiply(x){
+        return function(y){
+            return x*y;
+        }
+    }
+    multiply(1)(2) // => 2
+#+END_SRC
+
+* Footnotes
+
+[fn:chrome] Turn on the es6 feature toggle here  [[chrome://flags/#enable-javascript-harmony]]
+
+[fn:closure] I'll go deeper in closure in chapter 2.
+
+[fn:es6] some essential feature of es6 http://blog.oyanglul.us/javascript/essential-ecmascript6.html
+
+[fn:es6-moz] https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_6_support_in_Mozilla
