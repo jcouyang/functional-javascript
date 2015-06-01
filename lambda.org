@@ -1,20 +1,19 @@
 #+title: Lambda
-#+keys: javascript, 柯里化, lambda, 闭包, clojure
-
+#+OPTIONS: toc:nil
 * Lambda
 why introducing lambda first? if you have played a PC game "half lift" in childhood, then you must
 have been familiar with "lambda".
 
 [[./images/lambda/Lambda_reactor_complex_logo.png]]
 
-the following definition is from wikipedia:
+the following definition is from [[http://en.wikipedia.org/wiki/Lambda_calculus][wikipedia]]:
 #+BEGIN_QUOTE
-lambda包括一条变换规则（变量替换）和一条函数定义方式，Lambda演算之通用在于，任何一个可计算函数都能用这种形式来表达和求值。因而，它是等价于图灵机的.
+Lambda calculus (also written as λ-calculus) is a formal system in mathematical logic for expressing computation based on function abstraction and application using variable binding and substitution
 #+END_QUOTE
 
 what was that? ok, let me put it this way: lambda means a simple mapping relation from
 =x= to =y=, but in most programming languages, it also refers to /anonymous function/, as in most
-case it should only be used only once.
+case it should only be used once.
 
 #+BEGIN_SRC
 x => y
