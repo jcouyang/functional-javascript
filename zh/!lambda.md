@@ -3,7 +3,7 @@ Lambda
 
 为什么讲 lambda, 如果小时候玩过游戏"半条命",那么你早都见过 lambda 了.
 
-![](file:./images/lambda/Lambda_reactor_complex_logo.png)
+![](./images/lambda/Lambda_reactor_complex_logo.png)
 
 我从wikipedia里面粘出来了这么一段定义:
 
@@ -11,7 +11,7 @@ Lambda
 
 好吧, 跟没解释一样. 简单来说lambda其实就是 `x` 到 `y` 的映射关系, 但在大部分支持函数式的编程语言中, 它等价于匿名函数. 被称为 lambda 表达式. 因为这些函数只需要用一次, 而且变换不复杂, 完全不需要命名.
 
-![](file:./images/lambda/parallel-universe.gif)
+![](./images/lambda/parallel-universe.gif)
 
 匿名函数在程序中的作用是可以作为参数传给高阶函数[1], 或者作为闭包被返回.
 
@@ -120,7 +120,7 @@ a.map(x => x*2);
 
 很怪不是吗, 确实是 Javascript 的一个 bug, 因此经常出现在各种面试题中, 问 `this` 到底是谁.
 
-![](file:./images/lambda/which-leela.gif)
+![](./images/lambda/which-leela.gif)
 
 试试替换成 arrow function
 

@@ -1,4 +1,4 @@
-> 如果你觉得这本书对你有帮助,忍不住要请[我一杯咖啡](https://gum.co/fpjs), 那么你将同时获得一本pdf版本的FPJS mini nook ![](file:./images/shut-up-and-take-my-money.gif)
+> 如果你觉得这本书对你有帮助,忍不住要请[我一杯咖啡](https://gum.co/fpjs), 那么你将同时获得一本pdf版本的FPJS mini nook ![](./images/shut-up-and-take-my-money.gif)
 
 Preface
 =======
@@ -9,11 +9,11 @@ Preface
 
 对果JavaScript的基本概念对你来说:
 
-![](file:./images/preface/what_you_talking.gif)
+![](./images/preface/what_you_talking.gif)
 
 可能本书并不适合你, 请先移步 [JavaScript Allonge](https://leanpub.com/javascript-allonge), 但是如果你学习函数式编程时感到费解:
 
-![I'm not reading the crap, summarize in one word](file:./images/preface/summarize_in_one_word.gif)
+![I'm not reading the crap, summarize in one word](./images/preface/summarize_in_one_word.gif)
 
 那么这本书将会对你会有所帮助.
 

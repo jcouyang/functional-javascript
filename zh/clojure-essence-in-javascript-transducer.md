@@ -104,7 +104,7 @@ yeah, 现在只需要一步就reduce出来结果了, reduce应用 `map(inc)(sum)
 
 答案是, 反转reduce的关系, 原来reduce用sum去计算结果, 现在,我们调用reducible的reduce方法来计算结果
 
-![](file:./images/came-out.gif)
+![](./images/came-out.gif)
 
 如果你还没有被我弄晕的话, 准备好, 又来一个新单词 *reducible*. 也就是可以被reduce的东西.
 

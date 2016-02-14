@@ -16,7 +16,7 @@ f(x) => (y -> x(y))
 
 概念是一样的, 如同[俄罗斯套娃](https://en.wikipedia.org/wiki/Matryoshka_doll) 当函数执行以后还需执行或者要对参数执行, 因此叫高阶函数.
 
-![](file:./images/higherorder/recursion.png)
+![](./images/higherorder/recursion.png)
 
 高阶函数最常见的应用如 `map`, `reduce`. 他们都是以传入不同的函数来以不同的方式操作数组元素.
 
@@ -70,7 +70,7 @@ Higher-order function
 
 什么意思呢? `fn` 返回 `fn`. 很简单就是 `fn() => fn`, 那么 `fn()()=>fn()=>fn` ...以此类推, 无论调用 fn 多少次,都最终返回 fn.
 
-![](file:./images/higherorder/1qUCC8s.png)
+![](./images/higherorder/1qUCC8s.png)
 
 这到底有什么用呢, 由于这里使用了 `fn` 的副作用(side affect) 来干了一些事情 `E[newName]=E[oldName]`, 也就是给 E 的方法起一个别名, 因此每次调用 fn 都会给 `E` 起一个别名. `aliasFor` 最后返回的是 `fn` 自己的一些别名, 使得可以 chain 起来更可读一些:
 
@@ -85,7 +85,7 @@ Higher-order function
 
 还记得 Haskell Curry吗
 
-![](file:./images/higherorder/curry.png)
+![](./images/higherorder/curry.png)
 
 多巧啊, 人家姓 Curry 名 Haskell, 难怪 Haskell 语言会自动柯里化, 呵呵. 但是不奇怪吗, 为什么要柯里化呢. 为什么如此重要得让 Haskell 会默认自动柯里化所有函数, 不就是返回一个部分配置好的函数吗.
 
@@ -250,7 +250,7 @@ var plus = curry(function(a, b){
 
 这就是函数式的思想, 不断地用已有函数, 来组合出新的函数.
 
-![](file:./images/higherorder/composition.jpg)
+![](./images/higherorder/composition.jpg)
 
 如图就是函数组合，来自 [Catgory Theory](https://en.wikipedia.org/wiki/Category_theory)（Funtor 也是从这来的，后面会讲到）, 既然从 A到B 有对应的映射f，B到 C有对应的映射g， 那么 `(g.f)(x)` 也就是 `f` 与 `g` 的组合 `g(f(x))` 就是 A到 C 的映射。上一章实现的 map 函数就相当于 `reverse.fold`.
 
@@ -333,7 +333,7 @@ underscore:
 
 由于 Eweda/Ramda 的函数都是自动柯里化,而且数据总是最后一个参数, 因此可以随意组合, 最终将需要处理的数据扔给组合好的函数就好了. 这才是函数式的思想. 先写好一个公式，在把数据扔给 公式。而不是算好一部分再把结果给另一个公式。
 
-![](file:./images/higherorder/ThreeFunctionMachines.jpg)
+![](./images/higherorder/ThreeFunctionMachines.jpg)
 
 而 underscore 要么是以对象保持中间数据, 用 chaining 的方式对目标应用各种函数（书上会写这是Flow-Base programming，但我觉得其实是 Monad，会在下一章中介绍）, 要么用函数嵌套函数, 将目标一层层传递下去.
 

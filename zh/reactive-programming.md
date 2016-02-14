@@ -1,6 +1,6 @@
 当我们都用习惯 Promise Monad 之后，我再来介绍一个跟时间相关的 Stream Monad，通过 Stream Monad，我们可以完成 Promise 或者是数组的奇淫巧计，而且符合所有 monad 的公理，于是我们叫它 Monadic Reactive Programming。
 
-![](file:./images/stream.gif)
+![](./images/stream.gif)
 
 Stream
 ======
